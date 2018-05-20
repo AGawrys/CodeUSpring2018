@@ -26,9 +26,6 @@ public class ActivityFeedServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         
         request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
-        /*PrintWriter out = response.getWriter();
-		out.println("<h1>Hello world!</h1>");
-		out.println("<p>This is our first servlet.</p>");*/
         
     }
     @Override
