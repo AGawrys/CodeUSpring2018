@@ -22,18 +22,15 @@ public class ActivityFeedServlet extends HttpServlet {
     public void init() throws ServletException{
         super.init();
     }
+    
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        
-        request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
-        
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{        
+        request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);   
     }
+    
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
-       
-        
-        response.sendRedirect("/activityfeed");
-        
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{  
+        response.sendRedirect("/activityfeed");   
     }
     
 }
