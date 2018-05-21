@@ -38,7 +38,7 @@
 
       <h1>About the CodeU Chat App</h1>
       <p>
-        This is an example chat application designed to be a starting point
+        This is an example chat application designed to be a starting point THE MATRIX IS REAL
         for your CodeU project team work. Here's some stuff to think about:
       </p>
 
