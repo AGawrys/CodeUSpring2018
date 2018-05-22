@@ -13,8 +13,12 @@
 // limitations under the License.
 
 package codeu.controller;
+
+import codeu.model.data.Conversation;
+import codeu.model.data.Message;
 import codeu.model.data.User;
 import codeu.model.store.basic.ConversationStore;
+import codeu.model.store.basic.MessageStore;
 import codeu.model.store.basic.UserStore;
 import java.io.IOException;
 import java.time.Instant;
@@ -55,7 +59,11 @@ public class ProfileServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
+        String requestUrl = request.getRequestURI();
+        String userProfile = requestUrl.substring("/user/".length());
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
+
+
   }
 
   /**
@@ -63,14 +71,24 @@ public class ProfileServlet extends HttpServlet {
    * the submitted form data, checks for validity and if correct adds the username to the session so
    * we know the user is logged in.
    */
-
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
 
+            String username = (String) request.getSession().getAttribute("user");
+            if (username == null) {
+              response.sendRedirect("/login");
+              return;
+            }
 
+            User user = userStore.getUser(username);
+            if (user == null) {
+              response.sendRedirect("/login");
+              return;
+            }
+            String requestUrl = request.getRequestURI();
+            String userProfile = requestUrl.substring("/user/".length());
+
+        response.sendRedirect("/user/" + username);
   }
-
-
-
 
 }
