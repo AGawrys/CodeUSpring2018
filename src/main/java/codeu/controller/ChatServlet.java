@@ -35,9 +35,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.jsoup.nodes.Document;
 
-
-
-
 /** Servlet class responsible for the chat page. */
 public class ChatServlet extends HttpServlet {
 
@@ -110,10 +107,7 @@ public class ChatServlet extends HttpServlet {
     request.setAttribute("messages", messages);
     request.getRequestDispatcher("/WEB-INF/view/chat.jsp").forward(request, response);
   }
-
-
-
-
+    //Method to clean the user's text
     public static String clean (String messageToClean, Whitelist whitelist){
       Document dirty = Parser.parseBodyFragment(messageToClean, "");
       Cleaner cleaner = new Cleaner(Whitelist.simpleText().addTags("strike", "code"));
