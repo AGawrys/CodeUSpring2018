@@ -43,9 +43,24 @@ public class AdminServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
     request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
+    String username = (String) request.getSession().getAttribute("user");
+        if (username == null) {
+  //User is not logged in
+          response.sendRedirect("/login");
+          return;
+        }
+    User user = userStore.getUser(username);
+        if (user == null) {
+  //User was not found
+          System.out.println("User not found: " + username);
+          response.sendRedirect("/login");
+          return;
+        }
+  //Users in this list can access the admin page
+        if(user.getName().matches("maria") || user.getName().matches("nieszka") ||
+           user.getName().matches("gregory")){
+          request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
+          return;
+        }
   }
-
-
-
-
-  }
+}

@@ -13,7 +13,6 @@
 // limitations under the License.
 
 package codeu.controller;
-import codeu.model.data.Profile;
 import codeu.model.data.User;
 import codeu.model.store.basic.ConversationStore;
 import codeu.model.store.basic.UserStore;
