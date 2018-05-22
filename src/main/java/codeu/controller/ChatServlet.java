@@ -30,6 +30,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
+import org.jsoup.safety.Cleaner;
+import org.jsoup.nodes.Element;
+import org.jsoup.parser.Parser;
+import org.jsoup.nodes.Document;
 
 /** Servlet class responsible for the chat page. */
 public class ChatServlet extends HttpServlet {
@@ -103,6 +107,14 @@ public class ChatServlet extends HttpServlet {
     request.setAttribute("messages", messages);
     request.getRequestDispatcher("/WEB-INF/view/chat.jsp").forward(request, response);
   }
+    //Method to clean the user's text
+    public static String clean (String messageToClean, Whitelist whitelist){
+      Document dirty = Parser.parseBodyFragment(messageToClean, "");
+      Cleaner cleaner = new Cleaner(Whitelist.simpleText().addTags("strike", "code"));
+      Document clean = cleaner.clean(dirty);
+      clean.outputSettings().prettyPrint(false);
+      return clean.body().html();
+    }
 
   /**
    * This function fires when a user submits the form on the chat page. It gets the logged-in
@@ -141,7 +153,8 @@ public class ChatServlet extends HttpServlet {
     String messageContent = request.getParameter("message");
 
     // this removes any HTML from the message content
-    String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.none());
+    String cleanedMessageContent = clean(messageContent, Whitelist.simpleText());
+
 
     Message message =
         new Message(
