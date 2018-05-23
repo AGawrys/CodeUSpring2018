@@ -1,0 +1,12 @@
+codeu\model\store\basic\MessageStoreTest.class
+codeu\controller\ChatServletTest.class
+codeu\controller\ConversationServletTest.class
+codeu\model\store\basic\ConversationStoreTest.class
+codeu\model\store\persistence\PersistentStorageAgentTest.class
+codeu\model\store\basic\UserStoreTest.class
+codeu\model\data\UserTest.class
+codeu\controller\LoginServletTest.class
+codeu\model\store\persistence\PersistentDataStoreTest.class
+codeu\controller\RegisterServletTest.class
+codeu\model\data\MessageTest.class
+codeu\model\data\ConversationTest.class

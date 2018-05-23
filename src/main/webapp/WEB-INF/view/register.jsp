@@ -21,16 +21,23 @@
 </head>
 <body>
 
-  <nav>
-    <a id="navTitle" href="/">CodeU Chat App</a>
+  <nav>  
+   <a id="navTitle" href="/">CodeU Chat App</a>
     <a href="/conversations">Conversations</a>
-    <% if(request.getSession().getAttribute("user") != null) { %>
-      <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-    <% } else { %>
-      <a href="/login">Login</a>
+    <% if(request.getSession().getAttribute("user") != null){ %>
+    <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
+    <% } else{ %>
+    <a href="/login">Login</a>
     <% } %>
     <a href="/about.jsp">About</a>
+<<<<<<< HEAD
     <a href="/activityfeed">Feed</a>
+=======
+    <% if(request.getSession().getAttribute("user") != null){ %>
+    <a href="/user/<%=request.getSession().getAttribute("user")%>">Profile</a>
+    <% } else{ %>
+    <% } %>
+>>>>>>> MariaC
   </nav>
 
   <div id="container">
