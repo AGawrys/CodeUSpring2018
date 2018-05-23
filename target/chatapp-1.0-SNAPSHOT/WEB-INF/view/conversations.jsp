@@ -36,7 +36,6 @@
     <% if(request.getSession().getAttribute("user") != null){ %>
     <a href="/user/<%=request.getSession().getAttribute("user")%>">Profile</a>
     <% } else{ %>
-  
     <% } %>
   </nav>
 
