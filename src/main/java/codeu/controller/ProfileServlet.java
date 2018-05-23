@@ -59,10 +59,8 @@ public class ProfileServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-     
               String requestUrl = request.getRequestURI();
               String userProfile = requestUrl.substring("/user/".length());
-
               User user = userStore.getUser(userProfile);
               if (user == null) {
                 // couldn't find conversation, redirect to conversation list
@@ -85,23 +83,17 @@ public class ProfileServlet extends HttpServlet {
 
 	   String username = (String) request.getSession().getAttribute("user");
 	    if (username == null) {
-	      // user is not logged in, don't let them add a message
+
 	      response.sendRedirect("/login");
 	      return;
 	    }
-
             String requestUrl = request.getRequestURI();
             String userProfile = requestUrl.substring("/user/".length());
-
             User user = userStore.getUser(userProfile);
             if (user == null) {
-              // couldn't find conversation, redirect to conversation list
               response.sendRedirect("/login");
               return;
             }
-
-
         response.sendRedirect("/user/" + userProfile);
   }
-
 }
