@@ -21,7 +21,7 @@
 </head>
 <body>
 
-  <nav>
+  <nav>  
     <a id="navTitle" href="/">CodeU Chat App</a>
     <a href="/conversations">Conversations</a>
     <% if(request.getSession().getAttribute("user") != null){ %>

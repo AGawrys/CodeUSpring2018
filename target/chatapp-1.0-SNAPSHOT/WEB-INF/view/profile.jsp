@@ -15,8 +15,9 @@
        <% if (request.getSession().getAttribute("user") != null) { %>
       <a href="/admin"> Admin page </a>
        <% } else { %>
-        <a href="/login">Login as Admin</a>
-        <a href="/user/"<%= request.getSession().getAttribute("user") %>Profile</a>
+       <a href="/login">Login as Admin</a>
+       <a href="/user/<%=request.getSession().getAttribute("user")%>">Profile</a>
+        
       <% } %>
     </nav>
 </head>

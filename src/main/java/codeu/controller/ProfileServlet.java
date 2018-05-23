@@ -59,11 +59,19 @@ public class ProfileServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-        String requestUrl = request.getRequestURI();
-        String userProfile = requestUrl.substring("/user/".length());
-    request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
+     
+              String requestUrl = request.getRequestURI();
+              String userProfile = requestUrl.substring("/user/".length());
 
-
+              User user = userStore.getUser(userProfile);
+              if (user == null) {
+                // couldn't find conversation, redirect to conversation list
+                System.out.println("Couldn't find " + userProfile);
+                response.sendRedirect("/login");
+                return;
+  }
+              request.setAttribute("userProfile", userProfile);
+              request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
 
   /**
@@ -71,24 +79,29 @@ public class ProfileServlet extends HttpServlet {
    * the submitted form data, checks for validity and if correct adds the username to the session so
    * we know the user is logged in.
    */
-  public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
+   @Override
+   public void doPost(HttpServletRequest request, HttpServletResponse response)
+       throws IOException, ServletException {
 
-            String username = (String) request.getSession().getAttribute("user");
-            if (username == null) {
-              response.sendRedirect("/login");
-              return;
-            }
+	   String username = (String) request.getSession().getAttribute("user");
+	    if (username == null) {
+	      // user is not logged in, don't let them add a message
+	      response.sendRedirect("/login");
+	      return;
+	    }
 
-            User user = userStore.getUser(username);
-            if (user == null) {
-              response.sendRedirect("/login");
-              return;
-            }
             String requestUrl = request.getRequestURI();
             String userProfile = requestUrl.substring("/user/".length());
 
-        response.sendRedirect("/user/" + username);
+            User user = userStore.getUser(userProfile);
+            if (user == null) {
+              // couldn't find conversation, redirect to conversation list
+              response.sendRedirect("/login");
+              return;
+            }
+
+
+        response.sendRedirect("/user/" + userProfile);
   }
 
 }
