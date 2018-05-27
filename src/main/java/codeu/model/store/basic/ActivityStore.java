@@ -10,6 +10,8 @@ import codeu.model.data.Conversation;
 import codeu.model.data.Message;
 import static codeu.model.data.Type.CONVERSATIONSTART;
 import static codeu.model.data.Type.MESSAGESENT;
+import static codeu.model.data.Type.USERJOINED;
+import codeu.model.data.User;
 import codeu.model.store.persistence.PersistentStorageAgent;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,22 +40,28 @@ public class ActivityStore {
     
     private List<Message> messages;
     private List<Conversation> conversations;
+    private List<User> users;
     
     private ActivityStore() {
         setMessageStore(MessageStore.getInstance());
         setConversationStore(ConversationStore.getInstance());
+        setUserStore(UserStore.getInstance());
     }
     
     //method should sort from most recent to least recent, only a chunk of data
     public List<Activity> getAllActivities() {
         messages = messageStore.getAll();
         conversations = conversationStore.getAllConversations();
+        users = userStore.getAll();
         List<Activity> activities = new ArrayList<>();
         for(int i =0;i< messages.size();i++){
             activities.add(new Activity(MESSAGESENT, messages.get(i).getId(), messages.get(i).getCreationTime()));
         }
         for(int j = 0; j<conversations.size(); j++){
             activities.add(new Activity(CONVERSATIONSTART, conversations.get(j).getId(), conversations.get(j).getCreationTime()));
+        }
+        for(int k = 0; k<users.size();k++){
+            activities.add(new Activity(USERJOINED, users.get(k).getId(), users.get(k).getCreationTime()));
         }
         activities.sort((Activity a1, Activity a2)->a1.getCreationTime().compareTo(a2.getCreationTime()));
         Collections.reverse(activities);
@@ -65,6 +73,9 @@ public class ActivityStore {
     }
     public void setConversationStore(ConversationStore conversationStore) {
         this.conversationStore = conversationStore;
+    }
+    public void setUserStore(UserStore userStore) {
+        this.userStore = userStore;
     }
 
 }

@@ -29,6 +29,12 @@
                 String msg = formatMessage(activity.objectId);
                 return msg;
             }
+            String userJoined(Activity activity){
+                String username = formatUsername(activity.getObjectId());
+                String time = formatCreationTime(activity.getCreationTime());
+                String result = time + " " + username + " joined!";
+                return result;
+            }
             String conversationStarted(Activity activity){
                 ConversationStore convoStore = ConversationStore.getInstance();
                 String convo = formatConversation(activity.getObjectId());
