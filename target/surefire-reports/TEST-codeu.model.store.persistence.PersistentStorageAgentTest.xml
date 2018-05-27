@@ -65,10 +65,10 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testWriteThroughConversation" time="0.016"/>
+  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testWriteThroughConversation" time="0.023"/>
   <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testWriteThroughMessage" time="0"/>
   <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testLoadConversations" time="0.001"/>
-  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testWriteThroughUser" time="0.009"/>
-  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testLoadMessages" time="0"/>
+  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testWriteThroughUser" time="0.001"/>
+  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testLoadMessages" time="0.001"/>
   <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testLoadUsers" time="0"/>
 </testsuite>

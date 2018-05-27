@@ -6,8 +6,10 @@
 package codeu.controller;
 
 import codeu.model.data.Activity;
+import codeu.model.data.Conversation;
 import codeu.model.data.Message;
 import codeu.model.store.basic.ActivityStore;
+import codeu.model.store.basic.ConversationStore;
 import codeu.model.store.basic.MessageStore;
 import java.io.IOException;
 import java.time.Instant;
@@ -59,17 +61,24 @@ public class ActivityFeedTest {
         ActivityStore activityStore = ActivityStore.getInstance();
         List<Message> message = new ArrayList<Message>();
         Instant older = Instant.now();
-        Instant newest = older.plusSeconds(1);
+        Instant newest = older.plusSeconds(3);
         message.add(new Message(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "Test1", older));
         message.add(new Message(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "Test2", newest));
         MessageStore mockMessageStore = Mockito.mock(MessageStore.class);
         Mockito.when(mockMessageStore.getAll()).thenReturn(message);
         activityStore.setMessageStore(mockMessageStore);
         
+        List<Conversation> conversations = new ArrayList<Conversation>();
+        Instant middle = older.plusSeconds(1);
+        conversations.add(new Conversation(UUID.randomUUID(), UUID.randomUUID(), "Test3",  middle));
+        ConversationStore mockConversationStore = Mockito.mock(ConversationStore.class);
+        Mockito.when(mockConversationStore.getAllConversations()).thenReturn(conversations);
+        activityStore.setConversationStore(mockConversationStore);
+        
         List<Activity> act = activityStore.getAllActivities();
         
         Mockito.verify(mockMessageStore).getAll();
-        Assert.assertEquals(2, act.size());
+        Assert.assertEquals(3, act.size());
         Assert.assertEquals(newest, act.get(0).creationTime);
     }
 
