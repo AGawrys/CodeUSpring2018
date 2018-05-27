@@ -1,3 +1,5 @@
+C:\Users\Agnieszka\codeu_project_2018\src\main\java\codeu\model\data\Type.java
+C:\Users\Agnieszka\codeu_project_2018\src\main\java\codeu\model\store\basic\ActivityStore.java
 C:\Users\Agnieszka\codeu_project_2018\src\main\java\codeu\controller\RegisterServlet.java
 C:\Users\Agnieszka\codeu_project_2018\src\main\java\codeu\model\store\persistence\PersistentDataStoreException.java
 C:\Users\Agnieszka\codeu_project_2018\src\main\java\codeu\model\data\Message.java
@@ -11,6 +13,7 @@ C:\Users\Agnieszka\codeu_project_2018\src\main\java\codeu\controller\LoginServle
 C:\Users\Agnieszka\codeu_project_2018\src\main\java\codeu\controller\ConversationServlet.java
 C:\Users\Agnieszka\codeu_project_2018\src\main\java\codeu\model\store\basic\UserStore.java
 C:\Users\Agnieszka\codeu_project_2018\src\main\java\codeu\controller\ServerStartupListener.java
+C:\Users\Agnieszka\codeu_project_2018\src\main\java\codeu\model\data\Activity.java
 C:\Users\Agnieszka\codeu_project_2018\src\main\java\codeu\model\store\basic\ConversationStore.java
 C:\Users\Agnieszka\codeu_project_2018\src\main\java\codeu\controller\ChatServlet.java
 C:\Users\Agnieszka\codeu_project_2018\src\main\java\codeu\model\store\persistence\PersistentStorageAgent.java

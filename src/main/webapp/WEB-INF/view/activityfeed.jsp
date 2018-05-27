@@ -5,6 +5,15 @@
 --%>
 
 
+<%@page import="codeu.model.data.Activity"%>
+<%@page import="codeu.model.store.basic.UserStore"%>
+<%@page import="java.util.List"%>
+<%@page import="codeu.model.data.Message"%>
+
+<%
+List<Activity> activities = (List<Activity>) request.getAttribute("activities");
+%>
+<%@include file = "activityfeed-helper.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +60,17 @@
       <p>
         Updates will appear here.
       </p>
-    </div>
+    
+    <% 
+        String result;
+        for(Activity activity : activities){
+            result = messageSent(activity);
+    %>
+        <li><%= result %></li>  
+    <%
+        }       
+    %>
+        </div>
     
     </body>
 </html>
