@@ -64,15 +64,14 @@ List<Activity> activities = (List<Activity>) request.getAttribute("activities");
     
     <% 
         String result;
-        for(Activity activity : activities){
-            if(activity.getType()==Type.MESSAGESENT){
+        for (Activity activity : activities) {
+            if (activity.getType() == Type.MESSAGESENT) {
                 result = messageSent(activity);
-            }
-            else if(activity.getType() == Type.CONVERSATIONSTART){
+            } else if (activity.getType() == Type.CONVERSATIONSTART) {
                 result = conversationStarted(activity);
-            }
-            else
+            } else {
                 result = userJoined(activity);
+            }S
     %>
         <li><%= result %></li>  
     <%

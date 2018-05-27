@@ -25,17 +25,19 @@
     </head>
     <body>
        <%!               
-            String messageSent(Activity activity){
-                String msg = formatMessage(activity.objectId);
-                return msg;
-            }
-            String userJoined(Activity activity){
+            String messageSent(Activity activity) {
+                    String msg = formatMessage(activity.objectId);
+                    return msg;
+                }
+
+            String userJoined(Activity activity) {
                 String username = formatUsername(activity.getObjectId());
                 String time = formatCreationTime(activity.getCreationTime());
                 String result = time + " " + username + " joined!";
                 return result;
             }
-            String conversationStarted(Activity activity){
+
+            String conversationStarted(Activity activity) {
                 ConversationStore convoStore = ConversationStore.getInstance();
                 String convo = formatConversation(activity.getObjectId());
                 String username = formatUsername(convoStore.getById(activity.getObjectId()).getOwnerId());
@@ -43,30 +45,34 @@
                 String result = time + " " + username + " started a new conversation: " + convo;
                 return result;
             }
-            String formatMessage(UUID msgId){
-               String msg;
-               MessageStore messageStore = MessageStore.getInstance();
-               Message message = messageStore.getById(msgId);
-               String username = formatUsername(message.getAuthorId());
-               String time = formatCreationTime(message.getCreationTime());
-               String convoName = formatConversation(message.getConversationId());
-               msg = time +" " + username + " sent a message in " + convoName + "chat: " + message.getContent();
-               return msg;
+
+            String formatMessage(UUID msgId) {
+                String msg;
+                MessageStore messageStore = MessageStore.getInstance();
+                Message message = messageStore.getById(msgId);
+                String username = formatUsername(message.getAuthorId());
+                String time = formatCreationTime(message.getCreationTime());
+                String convoName = formatConversation(message.getConversationId());
+                msg = time + " " + username + " sent a message in " + convoName + "chat: " + message.getContent();
+                return msg;
             }
-            String formatCreationTime(Instant time){
+
+            String formatCreationTime(Instant time) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).withLocale(Locale.US).withZone(ZoneId.systemDefault());
                 String result = formatter.format(time);
                 return result;
             }
-            String formatUsername(UUID userId){
-               UserStore userStore = UserStore.getInstance();
-               String username = userStore.getUser(userId).getName();
-               return username;
+
+            String formatUsername(UUID userId) {
+                UserStore userStore = UserStore.getInstance();
+                String username = userStore.getUser(userId).getName();
+                return username;
             }
-            String formatConversation(UUID convoId){
-               ConversationStore convoStore = ConversationStore.getInstance();
-               String convo = convoStore.getById(convoId).getTitle();
-               return convo;
+
+            String formatConversation(UUID convoId) {
+                ConversationStore convoStore = ConversationStore.getInstance();
+                String convo = convoStore.getById(convoId).getTitle();
+                return convo;
             }
         %>
     </body>

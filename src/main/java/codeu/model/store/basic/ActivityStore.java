@@ -54,16 +54,16 @@ public class ActivityStore {
         conversations = conversationStore.getAllConversations();
         users = userStore.getAll();
         List<Activity> activities = new ArrayList<>();
-        for(int i =0;i< messages.size();i++){
+        for (int i = 0; i < messages.size(); i++) {
             activities.add(new Activity(MESSAGESENT, messages.get(i).getId(), messages.get(i).getCreationTime()));
         }
-        for(int j = 0; j<conversations.size(); j++){
+        for (int j = 0; j < conversations.size(); j++) {
             activities.add(new Activity(CONVERSATIONSTART, conversations.get(j).getId(), conversations.get(j).getCreationTime()));
         }
-        for(int k = 0; k<users.size();k++){
+        for (int k = 0; k < users.size(); k++) {
             activities.add(new Activity(USERJOINED, users.get(k).getId(), users.get(k).getCreationTime()));
         }
-        activities.sort((Activity a1, Activity a2)->a1.getCreationTime().compareTo(a2.getCreationTime()));
+        activities.sort((Activity a1, Activity a2) -> a1.getCreationTime().compareTo(a2.getCreationTime()));
         Collections.reverse(activities);
         return activities;
     }
