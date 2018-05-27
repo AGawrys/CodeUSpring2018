@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="codeu.model.store.persistence.PersistentDataStoreTest" time="0.547" errors="0" skipped="0">
+<testsuite tests="3" failures="0" name="codeu.model.store.persistence.PersistentDataStoreTest" time="0.491" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_121\jre\bin"/>
@@ -65,7 +65,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="codeu.model.store.persistence.PersistentDataStoreTest" name="testSaveAndLoadConversations" time="0.512"/>
-  <testcase classname="codeu.model.store.persistence.PersistentDataStoreTest" name="testSaveAndLoadMessages" time="0.015"/>
-  <testcase classname="codeu.model.store.persistence.PersistentDataStoreTest" name="testSaveAndLoadUsers" time="0.02"/>
+  <testcase classname="codeu.model.store.persistence.PersistentDataStoreTest" name="testSaveAndLoadConversations" time="0.465"/>
+  <testcase classname="codeu.model.store.persistence.PersistentDataStoreTest" name="testSaveAndLoadMessages" time="0.009"/>
+  <testcase classname="codeu.model.store.persistence.PersistentDataStoreTest" name="testSaveAndLoadUsers" time="0.017"/>
 </testsuite>

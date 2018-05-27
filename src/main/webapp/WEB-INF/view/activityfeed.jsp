@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="codeu.model.data.Type"%>
 <%@page import="codeu.model.data.Activity"%>
 <%@page import="codeu.model.store.basic.UserStore"%>
 <%@page import="java.util.List"%>
@@ -64,7 +65,11 @@ List<Activity> activities = (List<Activity>) request.getAttribute("activities");
     <% 
         String result;
         for(Activity activity : activities){
-            result = messageSent(activity);
+            if(activity.getType()==Type.MESSAGESENT){
+                result = messageSent(activity);
+            }
+            else
+                result = conversationStarted(activity);
     %>
         <li><%= result %></li>  
     <%

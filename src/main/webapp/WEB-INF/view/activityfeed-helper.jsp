@@ -29,6 +29,14 @@
                 String msg = formatMessage(activity.objectId);
                 return msg;
             }
+            String conversationStarted(Activity activity){
+                ConversationStore convoStore = ConversationStore.getInstance();
+                String convo = formatConversation(activity.getObjectId());
+                String username = formatUsername(convoStore.getById(activity.getObjectId()).getOwnerId());
+                String time = formatCreationTime(convoStore.getById(activity.getObjectId()).getCreationTime());
+                String result = time + " " + username + " started a new conversation: " + convo;
+                return result;
+            }
             String formatMessage(UUID msgId){
                String msg;
                MessageStore messageStore = MessageStore.getInstance();

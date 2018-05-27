@@ -6,7 +6,9 @@
 package codeu.model.store.basic;
 
 import codeu.model.data.Activity;
+import codeu.model.data.Conversation;
 import codeu.model.data.Message;
+import static codeu.model.data.Type.CONVERSATIONSTART;
 import static codeu.model.data.Type.MESSAGESENT;
 import codeu.model.store.persistence.PersistentStorageAgent;
 import java.util.ArrayList;
@@ -35,17 +37,23 @@ public class ActivityStore {
     }
     
     private List<Message> messages;
+    private List<Conversation> conversations;
     
     private ActivityStore() {
-        setMessageStore(MessageStore.getInstance());      
+        setMessageStore(MessageStore.getInstance());
+        setConversationStore(ConversationStore.getInstance());
     }
     
     //method should sort from most recent to least recent, only a chunk of data
     public List<Activity> getAllActivities() {
         messages = messageStore.getAll();
+        conversations = conversationStore.getAllConversations();
         List<Activity> activities = new ArrayList<>();
         for(int i =0;i< messages.size();i++){
             activities.add(new Activity(MESSAGESENT, messages.get(i).getId(), messages.get(i).getCreationTime()));
+        }
+        for(int j = 0; j<conversations.size(); j++){
+            activities.add(new Activity(CONVERSATIONSTART, conversations.get(j).getId(), conversations.get(j).getCreationTime()));
         }
         activities.sort((Activity a1, Activity a2)->a1.getCreationTime().compareTo(a2.getCreationTime()));
         Collections.reverse(activities);
@@ -55,4 +63,8 @@ public class ActivityStore {
     public void setMessageStore(MessageStore messageStore) {
         this.messageStore = messageStore;
     }
+    public void setConversationStore(ConversationStore conversationStore) {
+        this.conversationStore = conversationStore;
+    }
+
 }
