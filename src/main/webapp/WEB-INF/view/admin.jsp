@@ -20,6 +20,11 @@
      </nav>
 </head>
   <body>
-      <h1>this is what the admin page looks like</h1>
+      <h1>this is what the admin page looks like with some hard coded data:</h1>
+      <ul>
+        <li>User Count: 22</li>
+        <li>Total Messages: 100022</li>
+        <li>Total Conversations: 22</li>
+      </ul>
   </body>
 </html>
