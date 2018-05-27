@@ -8,9 +8,11 @@ package codeu.controller;
 import codeu.model.data.Activity;
 import codeu.model.data.Conversation;
 import codeu.model.data.Message;
+import codeu.model.data.User;
 import codeu.model.store.basic.ActivityStore;
 import codeu.model.store.basic.ConversationStore;
 import codeu.model.store.basic.MessageStore;
+import codeu.model.store.basic.UserStore;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -75,11 +77,19 @@ public class ActivityFeedTest {
         Mockito.when(mockConversationStore.getAllConversations()).thenReturn(conversations);
         activityStore.setConversationStore(mockConversationStore);
         
+        List<User> users = new ArrayList<User>();
+        Instant middle2 = older.plusSeconds(2);
+        users.add(new User(UUID.randomUUID(), "Test4", "fakePassword", middle2));
+        UserStore mockUserStore = Mockito.mock(UserStore.class);
+        Mockito.when(mockUserStore.getAll()).thenReturn(users);
+        activityStore.setUserStore(mockUserStore);
+        
         List<Activity> act = activityStore.getAllActivities();
         
         Mockito.verify(mockMessageStore).getAll();
-        Assert.assertEquals(3, act.size());
+        Assert.assertEquals(4, act.size());
         Assert.assertEquals(newest, act.get(0).creationTime);
+        Assert.assertEquals(older, act.get(3).creationTime);
     }
 
 }
