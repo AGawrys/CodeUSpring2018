@@ -106,4 +106,12 @@ public class UserStoreTest {
     Assert.assertEquals(expectedUser.getName(), actualUser.getName());
     Assert.assertEquals(expectedUser.getCreationTime(), actualUser.getCreationTime());
   }
+
+  @Test
+  public void testGetUserCount() {
+    Integer resultSize = userStore.getUserCount();
+    Integer expectedResult = 3;
+
+    Assert.assertEquals(expectedResult, resultSize);
+  }
 }
