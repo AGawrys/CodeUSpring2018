@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="codeu.model.store.basic.ConversationStoreTest" time="0.004" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="codeu.model.store.basic.ConversationStoreTest" time="0.002" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="10.0.1+10"/>
@@ -65,9 +65,9 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testAddConversation" time="0.001"/>
-  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testGetConversationWithTitle_found" time="0.001"/>
-  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testIsTitleTaken_false" time="0.001"/>
+  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testAddConversation" time="0.002"/>
+  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testGetConversationWithTitle_found" time="0"/>
+  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testIsTitleTaken_false" time="0"/>
   <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testGetConversationWithTitle_notFound" time="0"/>
-  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testIsTitleTaken_true" time="0.001"/>
+  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testIsTitleTaken_true" time="0"/>
 </testsuite>

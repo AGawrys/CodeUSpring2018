@@ -9,9 +9,11 @@ codeu/controller/ServerStartupListener.class
 codeu/controller/ConversationServlet.class
 codeu/model/data/Message.class
 codeu/model/store/basic/ConversationStore.class
+codeu/model/data/About.class
 codeu/model/store/basic/MessageStore.class
 codeu/model/store/persistence/PersistentStorageAgent.class
 codeu/controller/RegisterServlet.class
 codeu/controller/LoginServlet.class
 codeu/controller/ProfileServlet.class
+codeu/model/store/basic/AboutMeStore.class
 codeu/model/store/persistence/PersistentDataStore.class

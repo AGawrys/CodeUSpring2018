@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="codeu.controller.LoginServletTest" time="0.097" errors="0" skipped="0">
+<testsuite tests="3" failures="0" name="codeu.controller.LoginServletTest" time="0.106" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="10.0.1+10"/>
@@ -65,7 +65,7 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="codeu.controller.LoginServletTest" name="testDoPost_ExistingUser" time="0.095"/>
-  <testcase classname="codeu.controller.LoginServletTest" name="testDoPost_NewUser" time="0.002"/>
-  <testcase classname="codeu.controller.LoginServletTest" name="testDoGet" time="0"/>
+  <testcase classname="codeu.controller.LoginServletTest" name="testDoPost_ExistingUser" time="0.104"/>
+  <testcase classname="codeu.controller.LoginServletTest" name="testDoPost_NewUser" time="0.001"/>
+  <testcase classname="codeu.controller.LoginServletTest" name="testDoGet" time="0.001"/>
 </testsuite>

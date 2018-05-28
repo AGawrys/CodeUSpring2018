@@ -7,6 +7,8 @@
 /Users/gregoryfranklin/CodeUSpring2018/src/main/java/codeu/controller/ConversationServlet.java
 /Users/gregoryfranklin/CodeUSpring2018/src/main/java/codeu/model/data/User.java
 /Users/gregoryfranklin/CodeUSpring2018/src/main/java/codeu/model/store/persistence/PersistentStorageAgent.java
+/Users/gregoryfranklin/CodeUSpring2018/src/main/java/codeu/model/store/basic/AboutMeStore.java
+/Users/gregoryfranklin/CodeUSpring2018/src/main/java/codeu/model/data/About.java
 /Users/gregoryfranklin/CodeUSpring2018/src/main/java/codeu/controller/ActivityFeedServlet.java
 /Users/gregoryfranklin/CodeUSpring2018/src/main/java/codeu/controller/LoginServlet.java
 /Users/gregoryfranklin/CodeUSpring2018/src/main/java/codeu/model/store/basic/UserStore.java

@@ -27,15 +27,15 @@ import java.util.List;
 public class AboutMeStore {
 
   /** Singleton instance of AboutMeStore. */
-  private static AbouteMeStore instance;
+  private static AboutMeStore instance;
 
   /**
    * Returns the singleton instance of AboutMeStore that should be shared between all servlet
    * classes. Do not call this function from a test; use getTestInstance() instead.
    */
-  public static AbouteMeStore getInstance() {
+  public static AboutMeStore getInstance() {
     if (instance == null) {
-      instance = new AbouteMeStore(PersistentStorageAgent.getInstance());
+      instance = new AboutMeStore(PersistentStorageAgent.getInstance());
     }
     return instance;
   }
@@ -56,7 +56,7 @@ public class AboutMeStore {
   private PersistentStorageAgent persistentStorageAgent;
 
   /** The in-memory list of abouts. */
-  private List<AbouteMe> abouts;
+  private List<About> abouts;
 
   /** This class is a singleton, so its constructor is private. Call getInstance() instead. */
   private AboutMeStore(PersistentStorageAgent persistentStorageAgent) {
