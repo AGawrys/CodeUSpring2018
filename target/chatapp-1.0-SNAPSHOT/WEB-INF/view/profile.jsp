@@ -1,3 +1,5 @@
+<%@ page import="codeu.model.store.basic.UserStore" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,10 +27,14 @@
       <div style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;" id="container">
         <h1><%= request.getSession().getAttribute("user")%></h1>
         <h1> ABOUT ME:</h1>
+        <h1><%= request.getParameter("AboutMe")%></h1>
           <div class="aboutMe">
-          <textarea name="description" id="description" class="form-control">About me</textarea>
+            <form action="/user/<%=request.getSession().getAttribute("user")%>" method="GET">
+              <input type="text" name="AboutMe" value="What about you?">
+              <br/><br/>
+              <input type="submit" value="Submit">
+            </form>    
           </div>
-          <button type="submit">Submit</button>
       </div>
   </body>
 </html>

@@ -59,6 +59,7 @@ public class ProfileServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
+
               String requestUrl = request.getRequestURI();
               String userProfile = requestUrl.substring("/user/".length());
               User user = userStore.getUser(userProfile);
@@ -94,6 +95,8 @@ public class ProfileServlet extends HttpServlet {
               response.sendRedirect("/login");
               return;
             }
+
+
         response.sendRedirect("/user/" + userProfile);
   }
 }
