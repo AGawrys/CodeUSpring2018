@@ -17,9 +17,11 @@ package codeu.controller;
 import codeu.model.data.Conversation;
 import codeu.model.data.Message;
 import codeu.model.data.User;
+import codeu.model.data.About;
 import codeu.model.store.basic.ConversationStore;
 import codeu.model.store.basic.MessageStore;
 import codeu.model.store.basic.UserStore;
+import codeu.model.store.basic.AboutMeStore;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
@@ -34,6 +36,8 @@ public class ProfileServlet extends HttpServlet {
   /** Store class that gives access to Users. */
   private UserStore userStore;
 
+  private AboutMeStore aboutMeStore;
+
   /**
    * Set up state for handling login-related requests. This method is only called when running in a
    * server, not when running in a test.
@@ -42,6 +46,8 @@ public class ProfileServlet extends HttpServlet {
   public void init() throws ServletException {
     super.init();
     setUserStore(UserStore.getInstance());
+    setAboutMeStore(AboutMeStore.getInstance());
+
   }
 
   /**
@@ -52,6 +58,10 @@ public class ProfileServlet extends HttpServlet {
     this.userStore = userStore;
   }
 
+  void setAboutMeStore(AboutMeStore aboutMeStore) {
+    this.aboutMeStore = aboutMeStore;
+  }
+
   /**
    * This function fires when a user requests the /profile URL. It simply forwards the request to
    * profile.jsp.
@@ -60,6 +70,10 @@ public class ProfileServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
 
+
+              String aboutString = request.getParameter("AboutMe");
+
+              //About about = aboutMeStore.getaboutWithTitle(aboutString);
               String requestUrl = request.getRequestURI();
               String userProfile = requestUrl.substring("/user/".length());
               User user = userStore.getUser(userProfile);
@@ -70,6 +84,7 @@ public class ProfileServlet extends HttpServlet {
                 return;
   }
               request.setAttribute("userProfile", userProfile);
+              //request.setAttribute("AboutMe", about);
               request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
 
@@ -89,7 +104,12 @@ public class ProfileServlet extends HttpServlet {
 	      return;
 	    }
             String requestUrl = request.getRequestURI();
+
+            String aboutString = request.getParameter("AboutMe");
+            About about = aboutMeStore.getaboutWithTitle(aboutString);
+
             String userProfile = requestUrl.substring("/user/".length());
+
             User user = userStore.getUser(userProfile);
             if (user == null) {
               response.sendRedirect("/login");

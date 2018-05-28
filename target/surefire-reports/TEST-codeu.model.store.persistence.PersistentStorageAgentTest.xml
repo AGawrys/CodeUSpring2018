@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="codeu.model.store.persistence.PersistentStorageAgentTest" time="0.031" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="codeu.model.store.persistence.PersistentStorageAgentTest" time="0.034" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="10.0.1+10"/>
@@ -65,10 +65,10 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testWriteThroughConversation" time="0.029"/>
-  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testWriteThroughMessage" time="0"/>
-  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testLoadConversations" time="0"/>
-  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testWriteThroughUser" time="0.001"/>
-  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testLoadMessages" time="0.001"/>
+  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testWriteThroughConversation" time="0.027"/>
+  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testWriteThroughMessage" time="0.001"/>
+  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testLoadConversations" time="0.001"/>
+  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testWriteThroughUser" time="0.005"/>
+  <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testLoadMessages" time="0"/>
   <testcase classname="codeu.model.store.persistence.PersistentStorageAgentTest" name="testLoadUsers" time="0"/>
 </testsuite>
