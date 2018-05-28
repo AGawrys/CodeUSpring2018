@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="7" failures="0" name="codeu.model.store.basic.UserStoreTest" time="0.12" errors="0" skipped="0">
+<testsuite tests="7" failures="0" name="codeu.model.store.basic.UserStoreTest" time="0.04" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="10.0.1+10"/>
@@ -65,11 +65,11 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="codeu.model.store.basic.UserStoreTest" name="testGetUser_byUsername_found" time="0.115"/>
-  <testcase classname="codeu.model.store.basic.UserStoreTest" name="testAddUser" time="0.001"/>
+  <testcase classname="codeu.model.store.basic.UserStoreTest" name="testGetUser_byUsername_found" time="0.04"/>
+  <testcase classname="codeu.model.store.basic.UserStoreTest" name="testAddUser" time="0"/>
   <testcase classname="codeu.model.store.basic.UserStoreTest" name="testIsUserRegistered_false" time="0"/>
   <testcase classname="codeu.model.store.basic.UserStoreTest" name="testGetUser_byUsername_notFound" time="0"/>
-  <testcase classname="codeu.model.store.basic.UserStoreTest" name="testIsUserRegistered_true" time="0.002"/>
-  <testcase classname="codeu.model.store.basic.UserStoreTest" name="testGetUser_byId_notFound" time="0.001"/>
-  <testcase classname="codeu.model.store.basic.UserStoreTest" name="testGetUser_byId_found" time="0.001"/>
+  <testcase classname="codeu.model.store.basic.UserStoreTest" name="testIsUserRegistered_true" time="0"/>
+  <testcase classname="codeu.model.store.basic.UserStoreTest" name="testGetUser_byId_notFound" time="0"/>
+  <testcase classname="codeu.model.store.basic.UserStoreTest" name="testGetUser_byId_found" time="0"/>
 </testsuite>
