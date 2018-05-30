@@ -1,5 +1,24 @@
+<%@ page import="codeu.model.data.Conversation" %>
+<%@ page import="codeu.model.data.Message" %>
+<%@ page import="codeu.model.data.User" %>
+<%@ page import="codeu.model.store.basic.ConversationStore" %>
+<%@ page import="codeu.model.store.basic.MessageStore" %>
+<%@ page import="codeu.model.store.basic.UserStore" %>
 
+
+   <%
+/** Retrieve an instance of each Datastore */
+ConversationStore conversationStore = ConversationStore.getInstance();
+UserStore userStore = UserStore.getInstance();
+MessageStore messageStore = MessageStore.getInstance();
+/** Retrieve sizes of each Datastore */
+Integer totalConvos = conversationStore.getConversationCount();
+Integer totalUsers = userStore.getUserCount();
+Integer totalMessages = messageStore.getMessagesCount();
+
+%>
 <!DOCTYPE html>
+
 <html>
 <head>
   <title>CodeU Chat App</title>
@@ -19,7 +38,15 @@
     <% } %>
      </nav>
 </head>
+
   <body>
-      <h1>this is what the admin page looks like</h1>
+
+      <h1>this is what the admin page looks like with some hard coded data:</h1>
+      <ul>
+        <li><b>Total Messages: <%= totalMessages %></b></li>
+        <li><b>Total Users:<%= totalUsers %></b></li>
+        <li><b>Total Conversations:<%= totalConvos %> </b> </li>
+      </ul>
+
   </body>
 </html>
