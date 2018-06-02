@@ -71,7 +71,7 @@ List<Activity> activities = (List<Activity>) request.getAttribute("activities");
                 result = conversationStarted(activity);
             } else {
                 result = userJoined(activity);
-            }S
+            }
     %>
         <li><%= result %></li>  
     <%

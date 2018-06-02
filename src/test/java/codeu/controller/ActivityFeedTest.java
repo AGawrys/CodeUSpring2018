@@ -37,6 +37,9 @@ public class ActivityFeedTest {
     private HttpServletRequest mockRequest;
     private HttpServletResponse mockResponse; 
     private RequestDispatcher mockRequestDispatcher;
+    private MessageStore mockMessageStore;
+    private ConversationStore mockConversationStore;
+    private UserStore mockUserStore;
 
     @Before
     public void setup() {
@@ -44,6 +47,9 @@ public class ActivityFeedTest {
         mockRequest = Mockito.mock(HttpServletRequest.class);
         mockResponse = Mockito.mock(HttpServletResponse.class);
         mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
+        mockMessageStore = Mockito.mock(MessageStore.class);
+        mockConversationStore = Mockito.mock(ConversationStore.class);
+        mockUserStore = Mockito.mock(UserStore.class);
         Mockito.when(mockRequest.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp"))
         .thenReturn(mockRequestDispatcher);
     }
@@ -59,37 +65,77 @@ public class ActivityFeedTest {
     }
     
     @Test
-    public void testGetMultipleActivities(){
+    public void testGetMessageActivities(){
         ActivityStore activityStore = ActivityStore.getInstance();
         List<Message> message = new ArrayList<Message>();
+        List<User> fakeUsers = new ArrayList<User>();
+        List<Conversation> fakeConversations = new ArrayList<Conversation>();
         Instant older = Instant.now();
         Instant newest = older.plusSeconds(3);
         message.add(new Message(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "Test1", older));
         message.add(new Message(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "Test2", newest));
-        MessageStore mockMessageStore = Mockito.mock(MessageStore.class);
+        message.add(new Message(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "Test2", older.plusSeconds(1)));
         Mockito.when(mockMessageStore.getAll()).thenReturn(message);
+        Mockito.when(mockUserStore.getAll()).thenReturn(fakeUsers);
+        Mockito.when(mockConversationStore.getAllConversations()).thenReturn(fakeConversations);
         activityStore.setMessageStore(mockMessageStore);
-        
-        List<Conversation> conversations = new ArrayList<Conversation>();
-        Instant middle = older.plusSeconds(1);
-        conversations.add(new Conversation(UUID.randomUUID(), UUID.randomUUID(), "Test3",  middle));
-        ConversationStore mockConversationStore = Mockito.mock(ConversationStore.class);
-        Mockito.when(mockConversationStore.getAllConversations()).thenReturn(conversations);
         activityStore.setConversationStore(mockConversationStore);
-        
-        List<User> users = new ArrayList<User>();
-        Instant middle2 = older.plusSeconds(2);
-        users.add(new User(UUID.randomUUID(), "Test4", "fakePassword", middle2));
-        UserStore mockUserStore = Mockito.mock(UserStore.class);
-        Mockito.when(mockUserStore.getAll()).thenReturn(users);
         activityStore.setUserStore(mockUserStore);
         
         List<Activity> act = activityStore.getAllActivities();
         
         Mockito.verify(mockMessageStore).getAll();
-        Assert.assertEquals(4, act.size());
+        Assert.assertEquals(3, act.size());
         Assert.assertEquals(newest, act.get(0).creationTime);
-        Assert.assertEquals(older, act.get(3).creationTime);
+        Assert.assertEquals(older, act.get(2).creationTime);
+    }
+    
+    @Test
+    public void testGetConversationActivities(){
+        ActivityStore activityStore = ActivityStore.getInstance();
+        List<User> fakeUsers = new ArrayList<User>();
+        List<Message> fakeMessages = new ArrayList<Message>();
+        List<Conversation> conversations = new ArrayList<Conversation>();
+        Instant oldest = Instant.now();
+        conversations.add(new Conversation(UUID.randomUUID(), UUID.randomUUID(), "Test1",  oldest));
+        conversations.add(new Conversation(UUID.randomUUID(), UUID.randomUUID(), "Test2",  oldest.plusSeconds(1)));
+        conversations.add(new Conversation(UUID.randomUUID(), UUID.randomUUID(), "Test3",  oldest.plusSeconds(2)));
+        Mockito.when(mockConversationStore.getAllConversations()).thenReturn(conversations);
+        Mockito.when(mockUserStore.getAll()).thenReturn(fakeUsers);
+        Mockito.when(mockMessageStore.getAll()).thenReturn(fakeMessages);
+        activityStore.setMessageStore(mockMessageStore);
+        activityStore.setConversationStore(mockConversationStore);
+        activityStore.setUserStore(mockUserStore);
+           
+        List<Activity> act = activityStore.getAllActivities();
+        
+        Mockito.verify(mockConversationStore).getAllConversations();
+        Assert.assertEquals(3, act.size());
+        Assert.assertEquals(oldest, act.get(2).creationTime); //the oldest should be last
+    }
+    
+    @Test
+    public void testGetUserActivities(){
+        ActivityStore activityStore = ActivityStore.getInstance();
+        List<User> users = new ArrayList<User>();
+        List<Message> fakeMessages = new ArrayList<Message>();
+        List<Conversation> fakeConversations = new ArrayList<Conversation>();
+        Instant oldest = Instant.now();
+        Instant younger = oldest.plusSeconds(1);
+        users.add(new User(UUID.randomUUID(), "Test4", "fakePassword", oldest));
+        users.add(new User(UUID.randomUUID(), "Test5", "fakePassword", younger));        
+        Mockito.when(mockUserStore.getAll()).thenReturn(users);
+        Mockito.when(mockMessageStore.getAll()).thenReturn(fakeMessages);
+        Mockito.when(mockConversationStore.getAllConversations()).thenReturn(fakeConversations); 
+        activityStore.setMessageStore(mockMessageStore);
+        activityStore.setConversationStore(mockConversationStore);
+        activityStore.setUserStore(mockUserStore);
+    
+        List<Activity> act = activityStore.getAllActivities();
+        
+        Mockito.verify(mockUserStore).getAll();
+        Assert.assertEquals(2, act.size());
+        Assert.assertEquals(oldest, act.get(1).creationTime); //the oldest should be last
     }
 
 }
