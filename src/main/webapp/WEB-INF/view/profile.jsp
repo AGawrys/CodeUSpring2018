@@ -3,7 +3,7 @@
 <%@ page import="java.util.List" %>
 
 <%
-About about = (About) request.getAttribute("user");
+About about = (About) request.getAttribute("AboutMe");
 %>
 <!DOCTYPE html>
 <html>
@@ -34,7 +34,7 @@ About about = (About) request.getAttribute("user");
         <h1> ABOUT ME:</h1>
         <% if(request.getParameter("AboutMe") == null){
         }else{%>
-        <h1><%= request.getParameter("AboutMe")%></h1>
+        <h1><%= request.getParameter("AboutMe") /*about.getTitle()*/%></h1>
         <%}%>
           <div class="aboutMe">
             <form action="/user/<%=request.getSession().getAttribute("user")%>" method="GET">

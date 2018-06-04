@@ -70,10 +70,6 @@ public class ProfileServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
 
-
-              String aboutString = request.getParameter("AboutMe");
-
-              //About about = aboutMeStore.getaboutWithTitle(aboutString);
               String requestUrl = request.getRequestURI();
               String userProfile = requestUrl.substring("/user/".length());
               User user = userStore.getUser(userProfile);
@@ -83,8 +79,13 @@ public class ProfileServlet extends HttpServlet {
                 response.sendRedirect("/login");
                 return;
   }
+              String aboutString = request.getParameter("AboutMe");
+
+              About about = aboutMeStore.getaboutWithTitle(aboutString);
+
               request.setAttribute("userProfile", userProfile);
-              //request.setAttribute("AboutMe", about);
+              request.setAttribute("user", user);
+              request.setAttribute("AboutMe", about);
               request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
 
@@ -106,7 +107,7 @@ public class ProfileServlet extends HttpServlet {
             String requestUrl = request.getRequestURI();
 
             String aboutString = request.getParameter("AboutMe");
-            About about = aboutMeStore.getaboutWithTitle(aboutString);
+            About aboutID = aboutMeStore.getaboutWithTitle(aboutString);
 
             String userProfile = requestUrl.substring("/user/".length());
 
@@ -116,7 +117,15 @@ public class ProfileServlet extends HttpServlet {
               return;
             }
 
+      About about =
+        new About(
+            aboutID.getId(),
+            user.getId(),
+            aboutString ,
+            Instant.now());
 
-        response.sendRedirect("/user/" + userProfile);
+      aboutMeStore.addabout(about);
+
+      response.sendRedirect("/user/" + userProfile);
   }
 }
