@@ -38,7 +38,7 @@
     <property name="library.jansi.path" value="/usr/local/Cellar/maven/3.5.3/libexec/lib/jansi-native"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="user.home" value="/Users/gregoryfranklin"/>
-    <property name="user.timezone" value="America/Los_Angeles"/>
+    <property name="user.timezone" value="America/Chicago"/>
     <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="10"/>
@@ -67,6 +67,6 @@
   </properties>
   <testcase classname="codeu.controller.RegisterServletTest" name="testDoPost_ExistingUser" time="0.002"/>
   <testcase classname="codeu.controller.RegisterServletTest" name="testDoPost_NewUser" time="0.077"/>
-  <testcase classname="codeu.controller.RegisterServletTest" name="testDoGet" time="0.001"/>
-  <testcase classname="codeu.controller.RegisterServletTest" name="testDoPost_BadUsername" time="0.001"/>
+  <testcase classname="codeu.controller.RegisterServletTest" name="testDoGet" time="0"/>
+  <testcase classname="codeu.controller.RegisterServletTest" name="testDoPost_BadUsername" time="0.002"/>
 </testsuite>

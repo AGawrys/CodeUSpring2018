@@ -38,7 +38,7 @@
     <property name="library.jansi.path" value="/usr/local/Cellar/maven/3.5.3/libexec/lib/jansi-native"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="user.home" value="/Users/gregoryfranklin"/>
-    <property name="user.timezone" value="America/Los_Angeles"/>
+    <property name="user.timezone" value="America/Chicago"/>
     <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="10"/>
@@ -65,9 +65,9 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testAddConversation" time="0.001"/>
+  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testAddConversation" time="0"/>
   <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testGetConversationWithTitle_found" time="0"/>
   <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testIsTitleTaken_false" time="0"/>
   <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testGetConversationWithTitle_notFound" time="0"/>
-  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testIsTitleTaken_true" time="0"/>
+  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testIsTitleTaken_true" time="0.001"/>
 </testsuite>

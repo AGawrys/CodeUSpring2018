@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="codeu.controller.ConversationServletTest" time="0.005" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="codeu.controller.ConversationServletTest" time="0.008" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="10.0.1+10"/>
@@ -38,7 +38,7 @@
     <property name="library.jansi.path" value="/usr/local/Cellar/maven/3.5.3/libexec/lib/jansi-native"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="user.home" value="/Users/gregoryfranklin"/>
-    <property name="user.timezone" value="America/Los_Angeles"/>
+    <property name="user.timezone" value="America/Chicago"/>
     <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="10"/>
@@ -67,8 +67,8 @@
   </properties>
   <testcase classname="codeu.controller.ConversationServletTest" name="testDoPost_NewConversation" time="0"/>
   <testcase classname="codeu.controller.ConversationServletTest" name="testDoGet" time="0"/>
-  <testcase classname="codeu.controller.ConversationServletTest" name="testDoPost_ConversationNameTaken" time="0"/>
-  <testcase classname="codeu.controller.ConversationServletTest" name="testDoPost_UserNotLoggedIn" time="0.001"/>
+  <testcase classname="codeu.controller.ConversationServletTest" name="testDoPost_ConversationNameTaken" time="0.002"/>
+  <testcase classname="codeu.controller.ConversationServletTest" name="testDoPost_UserNotLoggedIn" time="0.002"/>
   <testcase classname="codeu.controller.ConversationServletTest" name="testDoPost_BadConversationName" time="0.002"/>
   <testcase classname="codeu.controller.ConversationServletTest" name="testDoPost_InvalidUser" time="0.002"/>
 </testsuite>
