@@ -1,3 +1,10 @@
+<%@ page import="codeu.model.data.About" %>
+<%@ page import="codeu.model.store.basic.AboutMeStore" %>
+<%@ page import="java.util.List" %>
+
+<%
+About about = (About) request.getAttribute("AboutMe");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,10 +32,19 @@
       <div style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;" id="container">
         <h1><%= request.getSession().getAttribute("user")%></h1>
         <h1> ABOUT ME:</h1>
+        <% if(request.getParameter("AboutMe") == null){
+        }else{%>
+        <h1><%= request.getParameter("AboutMe") /*about.getTitle()*/%></h1>
+        <%}%>
           <div class="aboutMe">
-          <textarea name="description" id="description" class="form-control">About me</textarea>
+            <form action="/user/<%=request.getSession().getAttribute("user")%>" method="GET">
+              <textarea name="AboutMe" rows="10" cols="30">
+                What about you?
+              </textarea>
+              <br/><br/>
+              <input type="submit" value="Submit">
+            </form>    
           </div>
-          <button type="submit">Submit</button>
       </div>
   </body>
 </html>

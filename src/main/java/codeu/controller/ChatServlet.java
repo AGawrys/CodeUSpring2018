@@ -110,7 +110,7 @@ public class ChatServlet extends HttpServlet {
     //Method to clean the user's text
     public static String clean (String messageToClean, Whitelist whitelist){
       Document dirty = Parser.parseBodyFragment(messageToClean, "");
-      Cleaner cleaner = new Cleaner(Whitelist.simpleText().addTags("strike", "code"));
+      Cleaner cleaner = new Cleaner(Whitelist.basicWithImages().addTags("strike", "code"));
       Document clean = cleaner.clean(dirty);
       clean.outputSettings().prettyPrint(false);
       return clean.body().html();
@@ -153,7 +153,7 @@ public class ChatServlet extends HttpServlet {
     String messageContent = request.getParameter("message");
 
     // this removes any HTML from the message content
-    String cleanedMessageContent = clean(messageContent, Whitelist.simpleText());
+    String cleanedMessageContent = clean(messageContent, Whitelist.basicWithImages());
 
 
     Message message =
@@ -165,7 +165,7 @@ public class ChatServlet extends HttpServlet {
             Instant.now());
 
     messageStore.addMessage(message);
-
+  
     // redirect to a GET request
     response.sendRedirect("/chat/" + conversationTitle);
   }
