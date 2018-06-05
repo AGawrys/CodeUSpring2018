@@ -86,4 +86,12 @@ public class MessageStoreTest {
     Assert.assertEquals(expectedMessage.getContent(), actualMessage.getContent());
     Assert.assertEquals(expectedMessage.getCreationTime(), actualMessage.getCreationTime());
   }
+  @Test
+  public void testGetMessageCount() {
+    Integer resultSize = messageStore.getMessagesCount();
+      Integer expectedResult = 3;
+
+      Assert.assertEquals(expectedResult, resultSize);
+
+  }
 }

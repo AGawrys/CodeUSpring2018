@@ -79,4 +79,11 @@ public class ConversationStoreTest {
     Assert.assertEquals(
         expectedConversation.getCreationTime(), actualConversation.getCreationTime());
   }
+  @Test
+  public void testGetConversationCount() {
+    Integer resultSize = conversationStore.getConversationCount();
+    Integer expectedResult = 1;
+
+    Assert.assertEquals(expectedResult, resultSize);
+  }
 }

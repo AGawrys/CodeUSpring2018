@@ -54,14 +54,19 @@ public class AdminServletTest {
     UserStore mockUserStore = Mockito.mock(UserStore.class);
   }
 
+@Test
+   public void testDoGetNullUser() throws IOException, ServletException {
+     Mockito.when(mockSession.getAttribute("user")).thenReturn(null);
+
+     adminServlet.doGet(mockRequest, mockResponse);
+
+     Mockito.verify(mockResponse).sendRedirect("/login");
+   }
+
   @Test
-  public void testDoGetNullUser() throws IOException, ServletException {
-    Mockito.when(mockSession.getAttribute("user")).thenReturn(null);
-
-    adminServlet.doGet(mockRequest, mockResponse);
-
-    Mockito.verify(mockResponse).sendRedirect("/login");
-  }
-
+  public void testDoGet() throws IOException, ServletException {
+      adminServlet.doGet(mockRequest, mockResponse);
+      Mockito.verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
+  } 
 
 }
