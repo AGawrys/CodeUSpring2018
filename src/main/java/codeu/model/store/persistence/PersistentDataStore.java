@@ -17,6 +17,7 @@ package codeu.model.store.persistence;
 import codeu.model.data.Conversation;
 import codeu.model.data.Message;
 import codeu.model.data.User;
+import codeu.model.data.About;
 import codeu.model.store.persistence.PersistentDataStoreException;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -78,6 +79,34 @@ public class PersistentDataStore {
     }
 
     return users;
+  }
+
+
+   public List<About> loadAbouts() throws PersistentDataStoreException {
+
+    List<About> abouts = new ArrayList<>();
+
+    // Retrieve all users from the datastore.
+    Query query = new Query("chat-users");
+    PreparedQuery results = datastore.prepare(query);
+
+    for (Entity entity : results.asIterable()) {
+      try {
+        UUID uuid = UUID.fromString((String) entity.getProperty("uuid"));
+        UUID userName = UUID.fromString((String) entity.getProperty("owner_uuid"));
+        String passwordHash = (String) entity.getProperty("password_hash");
+        Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
+        About about = new About(uuid, userName, passwordHash, creationTime);
+        abouts.add(about);
+      } catch (Exception e) {
+        // In a production environment, errors should be very rare. Errors which may
+        // occur include network errors, Datastore service errors, authorization errors,
+        // database entity definition mismatches, or service mismatches.
+        throw new PersistentDataStoreException(e);
+      }
+    }
+
+    return abouts;
   }
 
   /**
@@ -178,6 +207,15 @@ public class PersistentDataStore {
     conversationEntity.setProperty("title", conversation.getTitle());
     conversationEntity.setProperty("creation_time", conversation.getCreationTime().toString());
     datastore.put(conversationEntity);
+  }
+
+  public void writeThrough(About about) {
+    Entity aboutEntity = new Entity("chat-conversations", about.getId().toString());
+    aboutEntity.setProperty("uuid", about.getId().toString());
+    aboutEntity.setProperty("owner_uuid", about.getOwnerId().toString());
+    aboutEntity.setProperty("title", about.getTitle());
+    aboutEntity.setProperty("creation_time", about.getCreationTime().toString());
+    datastore.put(aboutEntity);
   }
 }
 

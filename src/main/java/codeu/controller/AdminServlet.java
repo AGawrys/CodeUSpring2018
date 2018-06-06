@@ -2,12 +2,15 @@ package codeu.controller;
 import javax.swing.*;
 import java.awt.*;
 import codeu.model.data.User;
+import codeu.model.data.Conversation;
+import codeu.model.store.basic.ConversationStore;
 import codeu.model.store.basic.UserStore;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -17,6 +20,8 @@ public class AdminServlet extends HttpServlet {
   /** Store class that gives access to Users. */
   private UserStore userStore;
 
+  private ConversationStore conversationStore;
+
   /**
    * Set up state for handling login-related requests. This method is only called when running in a
    * server, not when running in a test.
@@ -25,6 +30,7 @@ public class AdminServlet extends HttpServlet {
   public void init() throws ServletException {
     super.init();
     setUserStore(UserStore.getInstance());
+    setConversationStore(ConversationStore.getInstance());
   }
 
   /**
@@ -35,6 +41,9 @@ public class AdminServlet extends HttpServlet {
     this.userStore = userStore;
   }
 
+  void setConversationStore(ConversationStore conversationStore) {
+    this.conversationStore = conversationStore;
+  }
   /**
    * This function fires when a user requests the /profile URL. It simply forwards the request to
    * admin.jsp.
@@ -49,6 +58,7 @@ public class AdminServlet extends HttpServlet {
           response.sendRedirect("/login");
           return;
         }
+
     User user = userStore.getUser(username);
         if (user == null) {
   //User was not found
@@ -63,4 +73,5 @@ public class AdminServlet extends HttpServlet {
           return;
         }
   }
+
 }
