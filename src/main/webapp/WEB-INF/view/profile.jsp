@@ -28,9 +28,9 @@ About about = (About) request.getAttribute("AboutMe");
       <% } %>
     </nav>
 </head>
-  <body>
+  <body>       
       <div style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;" id="container">
-        <h1><%= request.getSession().getAttribute("user")%></h1>
+        <h1><%= request.getSession().getAttribute("user")%></h1> <img src="${pageContext.request.contextPath}/images/default_pfp.jpg"/>
         <h1> ABOUT ME:</h1>
         <% if(request.getParameter("AboutMe") == null){
         }else{%>

@@ -39,6 +39,11 @@ nav a {
   font-size: 36px;
 }
 
+img {
+    width: 10%;
+    height: 10%;
+}
+
 #container {
   margin-left: auto;
   margin-right: auto;
