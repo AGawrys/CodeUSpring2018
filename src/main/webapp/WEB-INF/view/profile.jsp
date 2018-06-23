@@ -30,6 +30,13 @@ About about = (About) request.getAttribute("AboutMe");
 </head>
   <body>
       <div style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;" id="container">
+          
+          <form method="POST" action="upload" enctype="multipart/form-data" >
+            File:
+            <input type="file" name="file" id="file" /> <br/>
+            <input type="submit" value="Upload" name="upload" id="upload" />
+          </form>
+        <%= request.getSession().getAttribute("image")%>
         <h1><%= request.getSession().getAttribute("user")%></h1>
         <h1> ABOUT ME:</h1>
         <% if(request.getParameter("AboutMe") == null){

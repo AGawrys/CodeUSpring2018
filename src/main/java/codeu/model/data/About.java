@@ -26,6 +26,7 @@ public class About {
   public final UUID owner;
   public final Instant creation;
   public final String title;
+  public final String image;
 
   /**
    * Constructs a new About.
@@ -35,11 +36,12 @@ public class About {
    * @param title the title of this About
    * @param creation the creation time of this About
    */
-  public About(UUID id, UUID owner, String title, Instant creation) {
+  public About(UUID id, UUID owner, String title, Instant creation, String image) {
     this.id = id;
     this.owner = owner;
     this.creation = creation;
     this.title = title;
+    this.image = image;
   }
 
   /** Returns the ID of this About. */
@@ -60,5 +62,9 @@ public class About {
   /** Returns the creation time of this About. */
   public Instant getCreationTime() {
     return creation;
+  }
+  
+  public String getImage(){
+      return image;
   }
 }

@@ -22,7 +22,13 @@ import codeu.model.store.basic.ConversationStore;
 import codeu.model.store.basic.MessageStore;
 import codeu.model.store.basic.UserStore;
 import codeu.model.store.basic.AboutMeStore;
+import com.google.appengine.repackaged.com.google.api.client.util.Base64;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
@@ -30,6 +36,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 /** Servlet class responsible for the login page. */
 public class ProfileServlet extends HttpServlet {
 
@@ -82,10 +89,12 @@ public class ProfileServlet extends HttpServlet {
               String aboutString = request.getParameter("AboutMe");
 
               About about = aboutMeStore.getaboutWithTitle(aboutString);
+              
 
               request.setAttribute("userProfile", userProfile);
               request.setAttribute("user", user);
               request.setAttribute("AboutMe", about);
+              //request.setAttribute("image", about.getImage());
               request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
 
@@ -104,8 +113,15 @@ public class ProfileServlet extends HttpServlet {
 	      response.sendRedirect("/login");
 	      return;
 	    }
+            
             String requestUrl = request.getRequestURI();
-
+            
+            Part filePart = request.getPart("file");
+            
+            InputStream fileContent = filePart.getInputStream();
+            
+            String imageString = encodeString(fileContent);
+            
             String aboutString = request.getParameter("AboutMe");
             About aboutID = aboutMeStore.getaboutWithTitle(aboutString);
 
@@ -122,10 +138,38 @@ public class ProfileServlet extends HttpServlet {
             aboutID.getId(),
             user.getId(),
             aboutString ,
-            Instant.now());
+            Instant.now(),
+            imageString);
 
       aboutMeStore.addabout(about);
 
       response.sendRedirect("/user/" + userProfile);
-  }
+   }
+   private String encodeString(InputStream fileInputStreamReader){
+       String resultEncoded = null;
+       try{
+           //FileInputStream fileInputStreamReader = new FileInputStream(file);
+           ByteArrayOutputStream output = new ByteArrayOutputStream();
+           byte[] buffer = new byte[1024];
+           int zero = 0;
+           while ((zero = fileInputStreamReader.read(buffer,0, buffer.length)) != -1){
+               output.write(buffer, 0, zero);
+           }
+           output.flush();
+           
+           byte[] bytes = output.toByteArray();
+           fileInputStreamReader.read(bytes);
+           resultEncoded = new String(Base64.encodeBase64(bytes), "UTF-8");
+       }
+       catch(FileNotFoundException e){
+           e.printStackTrace();
+       }
+       catch(IOException e){
+           e.printStackTrace();
+       }
+       return resultEncoded;
+   }
+   private Part decodeString(){
+       
+   }
 }
