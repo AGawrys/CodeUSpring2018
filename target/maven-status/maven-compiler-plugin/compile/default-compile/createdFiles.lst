@@ -11,6 +11,7 @@ codeu\controller\ProfileServlet.class
 codeu\model\store\basic\MessageStore.class
 codeu\model\data\Activity.class
 codeu\model\store\persistence\PersistentStorageAgent.class
+codeu\controller\MentionServlet.class
 codeu\model\store\basic\ActivityStore.class
 codeu\controller\RegisterServlet.class
 codeu\model\store\basic\MentionStore.class

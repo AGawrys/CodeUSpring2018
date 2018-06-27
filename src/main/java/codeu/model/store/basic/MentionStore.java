@@ -5,7 +5,6 @@
  */
 package codeu.model.store.basic;
 
-import codeu.model.store.basic.UserStore;
 import codeu.model.data.Mention;
 import codeu.model.data.Conversation;
 import codeu.model.data.Message;
@@ -17,11 +16,11 @@ import codeu.model.store.persistence.PersistentStorageAgent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+/**
+ *
+ * @author Agnieszka
+ */
 public class MentionStore {
 
     private static MentionStore instance;
@@ -54,14 +53,12 @@ public class MentionStore {
         messages = messageStore.getAll();
         conversations = conversationStore.getAllConversations();
         users = userStore.getAll();
-        String currentUser = "maria";
         List<Mention> mentions = new ArrayList<>();
         for (int i = 0; i < messages.size(); i++) {
-          if(messages.get(i).getContent().matches("(.*)@" + currentUser + "(.*)")){
+          if(messages.get(i).getContent().matches("@(.*)" )){
         mentions.add(new Mention(MESSAGESENT, messages.get(i).getId(), messages.get(i).getCreationTime()));
-        }
-        }
-
+      }
+      }
         mentions.sort((Mention a1, Mention a2) -> a1.getCreationTime().compareTo(a2.getCreationTime()));
         Collections.reverse(mentions);
         return mentions;

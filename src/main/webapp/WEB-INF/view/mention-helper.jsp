@@ -1,5 +1,4 @@
 
-
 <%@page import="codeu.model.store.basic.ConversationStore"%>
 <%@page import="java.time.ZoneId"%>
 <%@page import="java.util.Locale"%>
@@ -17,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Mentions</title>
+        <title>JSP Page</title>
     </head>
     <body>
        <%!
@@ -26,6 +25,22 @@
                     return msg;
                 }
 
+            String userJoined(Mention mention) {
+                String username = formatUsername(mention.getObjectId());
+                String time = formatCreationTime(mention.getCreationTime());
+                String result = time + " " + username + " joined!";
+                return result;
+            }
+
+            String conversationStarted(Mention mention) {
+                ConversationStore convoStore = ConversationStore.getInstance();
+                String convo = formatConversation(mention.getObjectId());
+                String username = formatUsername(convoStore.getById(mention.getObjectId()).getOwnerId());
+                String time = formatCreationTime(convoStore.getById(mention.getObjectId()).getCreationTime());
+                String result = time + " " + username + " started a new conversation: " + convo;
+                return result;
+            }
+
             String formatMessage(UUID msgId) {
                 String msg;
                 MessageStore messageStore = MessageStore.getInstance();
@@ -33,12 +48,10 @@
                 String username = formatUsername(message.getAuthorId());
                 String time = formatCreationTime(message.getCreationTime());
                 String convoName = formatConversation(message.getConversationId());
-                if (message.getContent().matches("@maria")){
-                  msg = time + " " + username + " sent a message in " + convoName + "chat: " + message.getContent();
-                  return msg;
-                }
+                msg = time + " " + username + " sent a message in " + convoName + "chat: " + message.getContent();
+                return msg;
             }
-
+        
             String formatCreationTime(Instant time) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).withLocale(Locale.US).withZone(ZoneId.systemDefault());
                 String result = formatter.format(time);

@@ -1,4 +1,5 @@
 
+
 <%@page import="codeu.model.data.Type"%>
 <%@page import="codeu.model.data.Mention"%>
 <%@page import="codeu.model.store.basic.UserStore"%>
@@ -8,11 +9,11 @@
 <%
 List<Mention> mentions = (List<Mention>) request.getAttribute("mentions");
 %>
-<%@include file = "mentions-helper.jsp" %>
+<%@include file = "mention-helper.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mentions</title>
+  <title>Mention</title>
   <link rel="stylesheet" href="/css/main.css" type="text/css">
 
   <style>
@@ -42,19 +43,18 @@ List<Mention> mentions = (List<Mention>) request.getAttribute("mentions");
     <% } %>
     <a href="/about.jsp">About</a>
     <a href="/activityfeed">Feed</a>
-    <a href="/user/<%=request.getSession().getAttribute("user")%>">Profile</a>
   </nav>
 
   <div id="container">
 
-    <h1><%= "Here are your mentions" %>
+    <h1><%= "Here's what happening on murmur" %>
       <a href="" style="float: right">&#8635;</a></h1>
 
     <hr/>
 
     <div id="feed">
       <p>
-        These are your mentions:
+        Mentions will show up here.
       </p>
 
     <%
