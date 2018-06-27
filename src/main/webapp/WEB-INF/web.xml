@@ -57,6 +57,16 @@
   </servlet-mapping>
 
   <servlet>
+      <servlet-name>ActivityFeedServlet</servlet-name>
+      <servlet-class>codeu.controller.ActivityFeedServlet</servlet-class>
+  </servlet>
+
+   <servlet-mapping>
+    <servlet-name>ActivityFeedServlet</servlet-name>
+    <url-pattern>/activityfeed</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>codeu.controller.RegisterServlet</servlet-class>
   </servlet>
@@ -66,7 +76,7 @@
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
 
-  <servlet>
+<servlet>
   <servlet-name>ProfileServlet</servlet-name>
   <servlet-class>codeu.controller.ProfileServlet</servlet-class>
 </servlet>
@@ -75,6 +85,16 @@
   <servlet-name>ProfileServlet</servlet-name>
   <url-pattern>/user/*</url-pattern>
 </servlet-mapping>
+
+<servlet>
+    <servlet-name>ActivityFeedServlet</servlet-name>
+    <servlet-class>codeu.controller.ActivityFeedServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ActivityFeedServlet</servlet-name>
+    <url-pattern>/activityfeed</url-pattern>
+  </servlet-mapping>
 
 <servlet>
   <servlet-name>AdminServlet</servlet-name>
@@ -87,13 +107,13 @@
 </servlet-mapping>
 
 <servlet>
-  <servlet-name>ActivityFeedServlet</servlet-name>
-  <servlet-class>codeu.controller.ActivityFeedServlet</servlet-class>
+  <servlet-name>MentionServlet</servlet-name>
+  <servlet-class>codeu.controller.MentionServlet</servlet-class>
 </servlet>
 
 <servlet-mapping>
-  <servlet-name>ActivityFeedServlet</servlet-name>
-  <url-pattern>/activityfeed</url-pattern>
+  <servlet-name>MentionServlet</servlet-name>
+  <url-pattern>/mentions</url-pattern>
 </servlet-mapping>
 
 </web-app>

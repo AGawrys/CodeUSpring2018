@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+
 /**
  * Store class that uses in-memory data structures to hold values and automatically loads from and
  * saves to PersistentStorageAgent. It's a singleton so all servlet classes can access the same
@@ -29,6 +30,7 @@ public class MessageStore {
 
   /** Singleton instance of MessageStore. */
   private static MessageStore instance;
+
 
   /**
    * Returns the singleton instance of MessageStore that should be shared between all servlet
@@ -84,12 +86,25 @@ public class MessageStore {
 
     return messagesInConversation;
   }
-  
+
   public Integer getMessagesCount() {
      return messages.size();
    }
   /** Sets the List of Messages stored by this MessageStore. */
   public void setMessages(List<Message> messages) {
     this.messages = messages;
+  }
+
+  public List<Message> getAll(){
+      return messages;
+  }
+
+  public Message getById(UUID id){
+      for (Message message : messages) {
+        if (message.getId().equals(id)) {
+          return message;
+        }
+      }
+      return null;
   }
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="codeu.model.store.basic.ConversationStoreTest" time="0.006" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="codeu.model.store.basic.ConversationStoreTest" time="0.005" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_161\jre\bin"/>
     <property name="java.vm.version" value="25.161-b12"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\mayfe\Desktop\CodeUrepo\CodeUSpring2018"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\mayfe\Desktop\CodeUrepo\CodeUSpring2018-master"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\mayfe\Desktop\CodeUrepo\CodeUSpring2018"/>
+    <property name="user.dir" value="C:\Users\mayfe\Desktop\CodeUrepo\CodeUSpring2018-master"/>
     <property name="java.runtime.version" value="1.8.0_161-b12"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_161\jre\lib\endorsed"/>
@@ -67,7 +67,7 @@
   </properties>
   <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testAddConversation" time="0.005"/>
   <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testGetConversationWithTitle_found" time="0"/>
-  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testIsTitleTaken_false" time="0.001"/>
+  <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testIsTitleTaken_false" time="0"/>
   <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testGetConversationCount" time="0"/>
   <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testGetConversationWithTitle_notFound" time="0"/>
   <testcase classname="codeu.model.store.basic.ConversationStoreTest" name="testIsTitleTaken_true" time="0"/>

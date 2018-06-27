@@ -6,16 +6,7 @@
 <%@ page import="codeu.model.store.basic.UserStore" %>
 
 
-   <%
-ConversationStore conversationStore = ConversationStore.getInstance();
-UserStore userStore = UserStore.getInstance();
-MessageStore messageStore = MessageStore.getInstance();
-/**Gets the total numbers from datastore */
-Integer totalConvos = conversationStore.getConversationCount();
-Integer totalUsers = userStore.getUserCount();
-Integer totalMessages = messageStore.getMessagesCount();
 
-%>
 <!DOCTYPE html>
 
 <html>
@@ -39,13 +30,22 @@ Integer totalMessages = messageStore.getMessagesCount();
 </head>
 
   <body>
-
-      <h1>this is what the admin page looks like with some hard coded data:</h1>
+        <% Boolean isRegistered = (Boolean) request.getAttribute("isRegistered");
+            Boolean isAdmin = (Boolean) request.getAttribute("isAdmin");
+        %>
+        <%   if (isAdmin) {  %>
+      <h1>this is what the admin page looks like with real data:</h1>
       <ul>
-        <li><b>Total Messages: <%= totalMessages %></b></li>
-        <li><b>Total Users:<%= totalUsers %></b></li>
-        <li><b>Total Conversations:<%= totalConvos %> </b> </li>
+        <li><b>Total Messages: <%= request.getAttribute("totalMessages") %></b></li>
+        <li><b>Total Users:<%= request.getAttribute("totalUsers") %></b></li>
+        <li><b>Total Conversations:<%= request.getAttribute("totalConvos") %></b> </li>
       </ul>
+
+          <% }
+          else {
+              response.sendRedirect("/login");
+            }
+          %>
 
   </body>
 </html>

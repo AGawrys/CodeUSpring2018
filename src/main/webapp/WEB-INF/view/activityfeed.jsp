@@ -1,16 +1,26 @@
-<%-- 
+<%--
     Document   : activity
     Created on : May 18, 2018, 1:21:58 AM
     Author     : Agnieszka
 --%>
 
 
+<%@page import="codeu.model.data.Type"%>
+<%@page import="codeu.model.data.Activity"%>
+<%@page import="codeu.model.store.basic.UserStore"%>
+<%@page import="java.util.List"%>
+<%@page import="codeu.model.data.Message"%>
+
+<%
+List<Activity> activities = (List<Activity>) request.getAttribute("activities");
+%>
+<%@include file = "activityfeed-helper.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
   <title>Activity</title>
   <link rel="stylesheet" href="/css/main.css" type="text/css">
-  
+
   <style>
     #feed {
       background-color: white;
@@ -18,7 +28,7 @@
       overflow-y: scroll
     }
   </style>
-  
+
   <script>
     // scroll the chat div to the bottom
     function scrollChat() {
@@ -51,7 +61,23 @@
       <p>
         Updates will appear here.
       </p>
-    </div>
-    
+
+    <%
+        String result;
+        for (Activity activity : activities) {
+            if (activity.getType() == Type.MESSAGESENT) {
+                result = messageSent(activity);
+            } else if (activity.getType() == Type.CONVERSATIONSTART) {
+                result = conversationStarted(activity);
+            } else {
+                result = userJoined(activity);
+            }
+    %>
+        <li><%= result %></li>
+    <%
+        }
+    %>
+        </div>
+
     </body>
 </html>

@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import codeu.model.data.User;
 import codeu.model.data.Conversation;
+import codeu.model.data.Message;
+import codeu.model.store.basic.MessageStore;
 import codeu.model.store.basic.ConversationStore;
 import codeu.model.store.basic.UserStore;
 import java.io.IOException;
@@ -10,7 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.util.ArrayList;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -22,6 +24,7 @@ public class AdminServlet extends HttpServlet {
 
   private ConversationStore conversationStore;
 
+ private MessageStore messageStore;
   /**
    * Set up state for handling login-related requests. This method is only called when running in a
    * server, not when running in a test.
@@ -31,6 +34,7 @@ public class AdminServlet extends HttpServlet {
     super.init();
     setUserStore(UserStore.getInstance());
     setConversationStore(ConversationStore.getInstance());
+    setMessageStore(MessageStore.getInstance());
   }
 
   /**
@@ -44,34 +48,40 @@ public class AdminServlet extends HttpServlet {
   void setConversationStore(ConversationStore conversationStore) {
     this.conversationStore = conversationStore;
   }
+
+  void setMessageStore(MessageStore messageStore) {
+    this.messageStore = messageStore;
+  }
   /**
    * This function fires when a user requests the /profile URL. It simply forwards the request to
    * admin.jsp.
    */
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
-    request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
-    String username = (String) request.getSession().getAttribute("user");
-        if (username == null) {
-  //User is not logged in
-          response.sendRedirect("/login");
-          return;
-        }
+   public void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws IOException, ServletException {
+      String username = (String) request.getSession().getAttribute("user");
+      boolean isRegistered = (username != null);
+      boolean isAdmin = isAdmin(username);
 
-    User user = userStore.getUser(username);
-        if (user == null) {
-  //User was not found
-          System.out.println("User not found: " + username);
-          response.sendRedirect("/login");
-          return;
-        }
-  //Users in this list can access the admin page
-        if(user.getName().matches("maria") || user.getName().matches("nieszka") ||
-           user.getName().matches("gregory")){
-          request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
-          return;
-        }
-  }
+      if (isAdmin) {
+        request.setAttribute("totalUsers", userStore.getUserCount());
+        request.setAttribute("totalConvos", conversationStore.getConversationCount());
+        request.setAttribute("totalMessages", messageStore.getMessagesCount());
+      }
+
+      request.setAttribute("isRegistered", isRegistered);
+      request.setAttribute("isAdmin", isAdmin);
+
+      request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
+      return;
+    }
+
+    private boolean isAdmin(String username) {
+      ArrayList<String> admins = new ArrayList<String>();
+      admins.add("mayfnessAdmin");
+      admins.add("nizeskaAdmin");
+      admins.add("gregoryAdmin");
+
+      return username != null && admins.contains(username);
+    }
 
 }

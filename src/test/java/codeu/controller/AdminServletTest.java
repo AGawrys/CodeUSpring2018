@@ -14,20 +14,18 @@
 
 package codeu.controller;
 
-import codeu.model.data.User;
-import codeu.model.store.basic.UserStore;
-import java.io.IOException;
-import java.time.Instant;
-import java.util.UUID;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import codeu.model.store.basic.UserStore;
+import codeu.model.store.basic.MessageStore;
+import codeu.model.store.basic.ConversationStore;
 
 public class AdminServletTest {
 
@@ -37,6 +35,9 @@ public class AdminServletTest {
   private RequestDispatcher mockRequestDispatcher;
   private HttpSession mockSession;
   private UserStore mockUserStore;
+  private ConversationStore mockConversationStore;
+  private MessageStore mockMessageStore;
+
 
   @Before
   public void setup() {
@@ -48,25 +49,70 @@ public class AdminServletTest {
 
     mockResponse = Mockito.mock(HttpServletResponse.class);
     mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
+
+    mockConversationStore = Mockito.mock(ConversationStore.class);
+    adminServlet.setConversationStore(mockConversationStore);
+
+    mockMessageStore = Mockito.mock(MessageStore.class);
+    adminServlet.setMessageStore(mockMessageStore);
+
+    mockUserStore = Mockito.mock(UserStore.class);
+    adminServlet.setUserStore(mockUserStore);
+
     Mockito.when(mockRequest.getRequestDispatcher("/WEB-INF/view/admin.jsp"))
         .thenReturn(mockRequestDispatcher);
-
-    UserStore mockUserStore = Mockito.mock(UserStore.class);
   }
 
-@Test
-   public void testDoGetNullUser() throws IOException, ServletException {
+  @Test
+   public void testDoGet_CantAccess() throws IOException, ServletException {
      Mockito.when(mockSession.getAttribute("user")).thenReturn(null);
 
      adminServlet.doGet(mockRequest, mockResponse);
 
-     Mockito.verify(mockResponse).sendRedirect("/login");
+     Mockito.verify(mockRequest).setAttribute("isRegistered", false);
+     Mockito.verify(mockRequest).setAttribute("isAdmin", false);
+     Mockito.verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
    }
 
-  @Test
-  public void testDoGet() throws IOException, ServletException {
-      adminServlet.doGet(mockRequest, mockResponse);
-      Mockito.verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
-  } 
+   @Test
+   public void testDoGet_NonAdminUserNoAccess() throws IOException, ServletException {
+     Mockito.when(mockSession.getAttribute("user")).thenReturn("testUsername");
 
-}
+     adminServlet.doGet(mockRequest, mockResponse);
+
+     Mockito.verify(mockRequest).setAttribute("isRegistered", true);
+     Mockito.verify(mockRequest).setAttribute("isAdmin", false);
+     Mockito.verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
+   }
+
+   @Test
+   public void testDoGet_AdminUserCanAccess() throws IOException, ServletException {
+     Mockito.when(mockSession.getAttribute("user")).thenReturn("mayfnessAdmin");
+
+     Mockito.when(mockUserStore.getUserCount()).thenReturn(0);
+     Mockito.when(mockConversationStore.getConversationCount()).thenReturn(0);
+     Mockito.when(mockMessageStore.getMessagesCount()).thenReturn(0);
+
+     adminServlet.doGet(mockRequest, mockResponse);
+
+     Mockito.verify(mockRequest).setAttribute("isRegistered", true);
+     Mockito.verify(mockRequest).setAttribute("isAdmin", true);
+     Mockito.verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
+   }
+
+   @Test
+   public void testDoGet_NoData() throws IOException, ServletException {
+     Mockito.when(mockSession.getAttribute("user")).thenReturn("mayfnessAdmin");
+
+     Mockito.when(mockUserStore.getUserCount()).thenReturn(0);
+     Mockito.when(mockConversationStore.getConversationCount()).thenReturn(0);
+     Mockito.when(mockMessageStore.getMessagesCount()).thenReturn(0);
+
+     adminServlet.doGet(mockRequest, mockResponse);
+
+     Mockito.verify(mockRequest).setAttribute("totalUsers", 0);
+     Mockito.verify(mockRequest).setAttribute("totalConvos", 0);
+     Mockito.verify(mockRequest).setAttribute("totalMessages", 0);
+     Mockito.verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
+   }
+ }
