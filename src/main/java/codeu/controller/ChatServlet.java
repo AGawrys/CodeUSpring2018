@@ -66,6 +66,7 @@ public class ChatServlet extends HttpServlet {
     setMessageStore(MessageStore.getInstance());
     setUserStore(UserStore.getInstance());
   }
+
   /**
    * Sets the ConversationStore used by this servlet. This function provides a common setup method
    * for use by the test framework or the servlet's init() function.
@@ -136,9 +137,6 @@ public class ChatServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
 
-
-    //AutoreplaceSmiles autoreplace = new AutoreplaceSmiles();
-
     String username = (String) request.getSession().getAttribute("user");
     if (username == null) {
       // user is not logged in, don't let them add a message
@@ -164,8 +162,6 @@ public class ChatServlet extends HttpServlet {
     }
 
     String messageContent = request.getParameter("message");
-
-    //String messageContent = EmojiParser.parseToUnicode(messageContent1);
 
     // this removes any HTML from the message content
     String cleanedMessageContent = clean(messageContent, Whitelist.basicWithImages());

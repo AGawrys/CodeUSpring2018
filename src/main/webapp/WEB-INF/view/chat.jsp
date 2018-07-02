@@ -97,5 +97,9 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
   </div>
 
+  <div>
+    <p align="left" margin = "auto">This is some text in a paragraph.</p>
+  <div>
+
 </body>
 </html>
