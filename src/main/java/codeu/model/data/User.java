@@ -23,6 +23,7 @@ public class User {
   private final String name;
   private final String passwordHash;
   private final Instant creation;
+  private String profileImageString;
 
   /**
    * Constructs a new User.
@@ -37,13 +38,14 @@ public class User {
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
+    this.profileImageString = null;
   }
 
   /** Returns the ID of this User. */
   public UUID getId() {
     return id;
   }
-
+  
   /** Returns the username of this User. */
   public String getName() {
     return name;
@@ -57,5 +59,11 @@ public class User {
   /** Returns the creation time of this User. */
   public Instant getCreationTime() {
     return creation;
+  }
+  public String getImageString(){
+      return profileImageString;
+  }
+  public void setImageString(String image){
+      this.profileImageString = image;
   }
 }
