@@ -9,6 +9,7 @@ codeu\model\store\persistence\PersistentDataStore.class
 codeu\model\data\About.class
 codeu\controller\ProfileServlet.class
 codeu\model\store\basic\MessageStore.class
+codeu\controller\LogoutServlet.class
 codeu\model\data\Activity.class
 codeu\model\store\persistence\PersistentStorageAgent.class
 codeu\controller\MentionServlet.class

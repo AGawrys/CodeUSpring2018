@@ -21,6 +21,7 @@ About about = (About) request.getAttribute("AboutMe");
     <a href="/about.jsp">About</a>
     <a href="/activityfeed">Feed</a>
     <a href="/user/<%=request.getSession().getAttribute("user")%>">Profile</a>
+    <a href="/logout" > Logout</a>
   </nav>
 
     </nav>
