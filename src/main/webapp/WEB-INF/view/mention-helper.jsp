@@ -51,7 +51,7 @@
                 msg = time + " " + username + " sent a message in " + convoName + "chat: " + message.getContent();
                 return msg;
             }
-        
+
             String formatCreationTime(Instant time) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).withLocale(Locale.US).withZone(ZoneId.systemDefault());
                 String result = formatter.format(time);
@@ -68,6 +68,11 @@
                 ConversationStore convoStore = ConversationStore.getInstance();
                 String convo = convoStore.getById(convoId).getTitle();
                 return convo;
+            }
+            String getMentionMessage (UUID ObjectId){
+              MessageStore messageStore = MessageStore.getInstance();
+              Message message = messageStore.getById(ObjectId);
+              return message.getContent();
             }
         %>
     </body>

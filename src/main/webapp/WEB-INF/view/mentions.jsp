@@ -58,8 +58,9 @@ List<Mention> mentions = (List<Mention>) request.getAttribute("mentions");
       </p>
 
     <%
-        String result;
+        String result = "";
         for (Mention mention : mentions) {
+          if( getMentionMessage(mention.getObjectId()).contains("@" + request.getSession().getAttribute("user"))){
             if (mention.getType() == Type.MESSAGESENT) {
                 result = messageSent(mention);
             } else if (mention.getType() == Type.CONVERSATIONSTART) {
@@ -67,6 +68,7 @@ List<Mention> mentions = (List<Mention>) request.getAttribute("mentions");
             } else {
                 result = userJoined(mention);
             }
+          }
     %>
         <li><%= result %></li>
     <%

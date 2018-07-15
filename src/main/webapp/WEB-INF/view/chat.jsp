@@ -1,12 +1,9 @@
 <%--
   Copyright 2017 Google Inc.
-
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
-
      http://www.apache.org/licenses/LICENSE-2.0
-
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   \
@@ -26,6 +23,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title><%= conversation.getTitle() %></title>
   <link rel="stylesheet" href="/css/main.css" type="text/css">
 
@@ -68,15 +66,26 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <div id="chat">
       <ul>
-    <%
-      for (Message message : messages) {
-        String author = UserStore.getInstance()
-          .getUser(message.getAuthorId()).getName();
-    %>
-      <li><strong><a href="/user/<%=author%>"><%= author %></a></strong> <%= message.getContent() %></li>
-    <%
-      }
-    %>
+        <%
+         String currentUser= "@" + request.getSession().getAttribute("user");
+
+           for (Message message : messages) {
+             String author = UserStore.getInstance().getUser(message.getAuthorId()).getName();
+         %>
+         <li><strong><a href="/user/<%=author%>"><%= author %></a></strong></li>
+
+         <%  if(message.getContent().contains(currentUser)){ %>
+
+              <strong><%= message.getContent() %></strong>
+           <%} else{%>
+            <%= message.getContent() %>
+         <%
+          }
+          %>
+          </li>
+         <%
+           }
+         %>
       </ul>
     </div>
 
@@ -95,6 +104,10 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
 
   </div>
+
+  <div>
+    <p align="left" margin = "auto">This is some text in a paragraph.</p>
+  <div>
 
 </body>
 </html>
