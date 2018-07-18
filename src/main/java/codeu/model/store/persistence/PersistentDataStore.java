@@ -25,12 +25,14 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-/**
+import java.lang.*;
+/*
  * This class handles all interactions with Google App Engine's Datastore service. On startup it
  * sets the state of the applications's data objects from the current contents of its Datastore. It
  * also performs writes of new of modified objects back to the Datastore.
@@ -68,7 +70,8 @@ public class PersistentDataStore {
         String userName = (String) entity.getProperty("username");
         String passwordHash = (String) entity.getProperty("password_hash");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
-        User user = new User(uuid, userName, passwordHash, creationTime);
+        Boolean admin = Boolean.parseBoolean((String) entity.getProperty("admin"));
+        User user = new User(uuid, userName, passwordHash, creationTime, admin);
         users.add(user);
       } catch (Exception e) {
         // In a production environment, errors should be very rare. Errors which may
@@ -185,6 +188,7 @@ public class PersistentDataStore {
     userEntity.setProperty("username", user.getName());
     userEntity.setProperty("password_hash", user.getPasswordHash());
     userEntity.setProperty("creation_time", user.getCreationTime().toString());
+    userEntity.setProperty("admin", Boolean.toString(user.isAdmin()));
     datastore.put(userEntity);
   }
 
@@ -218,4 +222,3 @@ public class PersistentDataStore {
     datastore.put(aboutEntity);
   }
 }
-

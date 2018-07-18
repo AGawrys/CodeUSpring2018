@@ -12,6 +12,11 @@ import java.util.List;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+import java.time.Instant;
+import java.util.UUID;
+
 /**
  * Listener class that fires when the server first starts up, before any servlet classes are
  * instantiated.
@@ -28,6 +33,15 @@ public class ServerStartupListener implements ServletContextListener {
       List<Conversation> conversations = PersistentStorageAgent.getInstance().loadConversations();
       ConversationStore.getInstance().setConversations(conversations);
 
+      UserStore userStore = UserStore.getInstance();
+       String username = "Mayfadmin";
+       /** Check if admin exists, if not create it */
+      if(!userStore.isUserRegistered(username)){
+      String password = "admin";
+      String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+      User user = new User(UUID.randomUUID(), username, hashedPassword, Instant.now(), true);
+      userStore.addUser(user);
+      }
       List<Message> messages = PersistentStorageAgent.getInstance().loadMessages();
       MessageStore.getInstance().setMessages(messages);
 

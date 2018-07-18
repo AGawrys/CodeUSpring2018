@@ -11,7 +11,7 @@
 
 <html>
 <head>
-  <title>CodeU Chat App</title>
+  <title>AdminPage</title>
    <link rel="stylesheet" href="/css/main.css">
    <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -36,24 +36,20 @@
         <% }  %>
       </nav>
 </head>
+<div id="container">
+    <h1>Admin</h1>
 
-  <body>
-        <% Boolean isRegistered = (Boolean) request.getAttribute("isRegistered");
-            Boolean isAdmin = (Boolean) request.getAttribute("isAdmin");
-        %>
-        <%   if (isAdmin) {  %>
-      <h1>this is what the admin page looks like with real data:</h1>
-      <ul>
-        <li><b>Total Messages: <%= request.getAttribute("totalMessages") %></b></li>
-        <li><b>Total Users:<%= request.getAttribute("totalUsers") %></b></li>
-        <li><b>Total Conversations:<%= request.getAttribute("totalConvos") %></b> </li>
-      </ul>
+    <form action="/admin" method="POST">
+        <p> <b>Make someone admin:<b> </p>
+        <input type="text" name="toBeAdminUser" value="" placeholder="username" >
+        <br/>
+        <button type="submit">Submit</button>
+    </form>
 
-          <% }
-          else {
-              response.sendRedirect("/login");
-            }
-          %>
-
+    <% if(request.getAttribute("error") != null){ %>
+        <h2 style="color:red"><%= request.getAttribute("error") %></h2>
+    <% } else if(request.getAttribute("success") != null){%>
+        <h2 style="color:green"><%= request.getAttribute("success") %></h2>
+    <% } %>
   </body>
 </html>
