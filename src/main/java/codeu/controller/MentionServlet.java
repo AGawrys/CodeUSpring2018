@@ -20,9 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class MentionServlet extends HttpServlet {
-
-
-     /** Store class that gives access to Activities. */
+     /** Store class that gives access to Mentions. */
      private MentionStore mentionStore;
 
     @Override
@@ -32,7 +30,7 @@ public class MentionServlet extends HttpServlet {
 
     }
     /**
-    * Sets the ActivityStore used by this servlet. This function provides a common setup method
+    * Sets the MentionStore used by this servlet. This function provides a common setup method
     * for use by the test framework or the servlet's init() function.
     */
    void setMentionStore(MentionStore mentionStore) {

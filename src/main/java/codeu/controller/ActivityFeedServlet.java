@@ -24,8 +24,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author Agnieszka
  */
 public class ActivityFeedServlet extends HttpServlet {
-    
-    
      /** Store class that gives access to Activities. */
      private ActivityStore activityStore;
 
@@ -33,7 +31,6 @@ public class ActivityFeedServlet extends HttpServlet {
     public void init() throws ServletException{
         super.init();
         setActivityStore(ActivityStore.getInstance());
-        
     }
     /**
     * Sets the ActivityStore used by this servlet. This function provides a common setup method
@@ -44,15 +41,15 @@ public class ActivityFeedServlet extends HttpServlet {
    }
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{        
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         List<Activity> activities = activityStore.getAllActivities();
         request.setAttribute("activities", activities);
-        request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);   
+        request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
     }
-    
+
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{  
-        response.sendRedirect("/activityfeed");   
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        response.sendRedirect("/activityfeed");
     }
-    
+
 }

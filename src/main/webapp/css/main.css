@@ -15,22 +15,24 @@
 
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: 'Lato', sans-serif;
   line-height: 1.6;
   font-size: 18px;
   line-height: 1.6;
-  color: #444;
-  background-color: #eeeeee;
+  color: black;
+  background-color: white;
+
 }
 
 nav {
-  background-color: #283593;
+    background-color: #84CEEB;
 }
 
 nav a {
-  color: white;
+  color: black;
   display: inline-block;
   font-size: 24px;
+  font-family: 'Montserrat', sans-serif;
   margin: 15px;
   text-decoration: none;
 }
@@ -46,7 +48,7 @@ nav a {
 }
 
 h1 {
-  color: #757575;
+  color: black;
 }
 
 input {
