@@ -24,22 +24,31 @@ body {
 
 }
 
-nav {
+.navbar-default {
+    font-size: 15pt;
+    font-family: 'Montserrat', sans-serif;
     background-color: #84CEEB;
-}
+    border-color: #84CEEB; }
 
-nav a {
-  color: black;
-  display: inline-block;
-  font-size: 24px;
-  font-family: 'Montserrat', sans-serif;
-  margin: 15px;
-  text-decoration: none;
-}
+    .navbar-brand {
+      font-size: 40pt;
+        color: #84CEEB;
+        &:hover, &:focus {
+            color: #5AB9EA; }}
+    .navbar-nav {
+        > li {
+            > a {
+                color: #84CEEB;
+                &:hover, &:focus {
+                    color: #5AB9EA;   }}}}
 
-#navTitle {
-  font-size: 36px;
-}
+    .navbar-toggle {
+        border-color: #84CEEB;
+        &:hover, &:focus {
+            background-color: black; }
+        .icon-bar {
+            background-color: #84CEEB; }}
+
 
 #container {
   margin-left: auto;

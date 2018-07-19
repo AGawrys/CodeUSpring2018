@@ -37,7 +37,7 @@ public class ServerStartupListener implements ServletContextListener {
        String username = "Mayfadmin";
        /** Check if admin exists, if not create it */
       if(!userStore.isUserRegistered(username)){
-      String password = "admin";
+      String password = "murmuradmin";
       String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
       User user = new User(UUID.randomUUID(), username, hashedPassword, Instant.now(), true);
       userStore.addUser(user);
