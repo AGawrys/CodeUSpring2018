@@ -70,16 +70,10 @@ public class User {
   public Instant getCreationTime() {
     return creation;
   }
-/**
-     * Returns if user is admin
-     */
+
     public Boolean isAdmin() {
         return admin;
     }
-
-    /**
-     * Set admin attribute
-     */
     public void setAdmin(Boolean admin) {
         this.admin = admin;
     }
