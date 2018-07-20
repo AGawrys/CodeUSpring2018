@@ -5,9 +5,9 @@
  */
 package codeu.controller;
 
-import codeu.model.data.Activity;
+import codeu.model.data.Mention;
 import codeu.model.data.Message;
-import codeu.model.store.basic.ActivityStore;
+import codeu.model.store.basic.MentionStore;
 import codeu.model.store.basic.ConversationStore;
 import codeu.model.store.basic.MessageStore;
 import codeu.model.store.basic.UserStore;
@@ -19,37 +19,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Agnieszka
- */
-public class ActivityFeedServlet extends HttpServlet {
-     /** Store class that gives access to Activities. */
-     private ActivityStore activityStore;
+public class MentionServlet extends HttpServlet {
+     /** Store class that gives access to Mentions. */
+     private MentionStore mentionStore;
 
     @Override
     public void init() throws ServletException{
         super.init();
-        setActivityStore(ActivityStore.getInstance());
+        setMentionStore(MentionStore.getInstance());
+
     }
     /**
-    * Sets the ActivityStore used by this servlet. This function provides a common setup method
+    * Sets the MentionStore used by this servlet. This function provides a common setup method
     * for use by the test framework or the servlet's init() function.
     */
-   void setActivityStore(ActivityStore activityStore) {
-     this.activityStore = activityStore;
+   void setMentionStore(MentionStore mentionStore) {
+     this.mentionStore = mentionStore;
    }
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{        
-        List<Activity> activities = activityStore.getAllActivities();
-        request.setAttribute("activities", activities);
-        request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);   
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        List<Mention> mentions = mentionStore.getAllMentions();
+        request.setAttribute("mentions", mentions);
+        request.getRequestDispatcher("/WEB-INF/view/mentions.jsp").forward(request, response);
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        response.sendRedirect("/activityfeed");
+        response.sendRedirect("/mentions");
     }
 
 }

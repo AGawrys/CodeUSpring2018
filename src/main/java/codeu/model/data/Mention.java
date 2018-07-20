@@ -7,15 +7,15 @@ package codeu.model.data;
 
 import java.time.Instant;
 import java.util.UUID;
-/**
- *
- * @author Agnieszka
- */
-public class Activity {
+
+
+public class Mention {
     public final Type type;
     public final UUID objectId;
     public final Instant creationTime;
-    public Activity(Type type, UUID objectId, Instant creationTime){
+
+    public Mention(Type type, UUID objectId, Instant creationTime){
+
         this.type = type;
         this.objectId = objectId;
         this.creationTime = creationTime;
@@ -32,4 +32,5 @@ public class Activity {
     public Instant getCreationTime() {
         return creationTime;
     }
+
 }

@@ -135,4 +135,5 @@ public class ConversationStore {
   public Integer getConversationCount() {
      return conversations.size();
    }
+
 }

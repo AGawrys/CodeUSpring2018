@@ -162,7 +162,6 @@ public class ChatServlet extends HttpServlet {
     }
 
     String messageContent = request.getParameter("message");
-
     // this removes any HTML from the message content
     String cleanedMessageContent = clean(messageContent, Whitelist.basicWithImages());
     String cleanedAndEmojiMessage = EmojiParser.parseToUnicode(cleanedMessageContent);
