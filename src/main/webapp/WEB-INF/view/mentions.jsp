@@ -1,31 +1,41 @@
-<%--
-  Copyright 2017 Google Inc.
 
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+<%@page import="codeu.model.data.Type"%>
+<%@page import="codeu.model.data.Mention"%>
+<%@page import="codeu.model.store.basic.UserStore"%>
+<%@page import="java.util.List"%>
+<%@page import="codeu.model.data.Message"%>
 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
---%>
-<%@ page import="java.util.List" %>
-<%@ page import="codeu.model.data.Conversation" %>
-
+<%
+List<Mention> mentions = (List<Mention>) request.getAttribute("mentions");
+%>
+<%@include file = "mention-helper.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Conversations</title>
+  <title>Mention</title>
+  <link rel="stylesheet" href="/css/main.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="/css/main.css">
+  <style>
+    #feed {
+      background-color: white;
+      height: 500px;
+      overflow-y: scroll
+    }
+  </style>
+
+  <script>
+    // scroll the chat div to the bottom
+    function scrollChat() {
+      var feedDiv = document.getElementById('feed');
+      feedDiv.scrollTop = feedDiv.scrollHeight;
+    };
+  </script>
 </head>
 <nav class="navbar navbar-default" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
@@ -64,51 +74,31 @@
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>
-<body>
+<body onload="scrollChat()">
   <div id="container">
-    <% if(request.getAttribute("error") != null){ %>
-        <h2 style="color:red"><%= request.getAttribute("error") %></h2>
-    <% } %>
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <h1>New Conversation</h1>
-      <form action="/conversations" method="POST">
-          <div class="form-group">
-            <label class="form-control-label">Title:</label>
-          <input type="text" name="conversationTitle">
+    <h1><%= "You have been tagged!" %>
+    <a href="" style="float: right">&#8635;</a></h1>
+    <hr/>
+    <div id="MentionFeed">
+    <p>Here are your mentions!</p>
+    <%
+        String result = "";
+        for (Mention mention : mentions) {
+          if( getMentionMessage(mention.getObjectId()).contains("@" + request.getSession().getAttribute("user"))){
+            if (mention.getType() == Type.MESSAGESENT) {
+                result = messageSent(mention);
+            } else if (mention.getType() == Type.CONVERSATIONSTART) {
+                result = conversationStarted(mention);
+            } else {
+                result = userJoined(mention);
+            }
+          }
+    %>
+        <li><%= result %></li>
+    <%
+        }
+    %>
         </div>
 
-        <button type="submit">Create</button>
-      </form>
-
-      <hr/>
-    <% } %>
-
-    <h1>Conversations</h1>
-
-    <%
-    List<Conversation> conversations =
-      (List<Conversation>) request.getAttribute("conversations");
-    if(conversations == null || conversations.isEmpty()){
-    %>
-      <p>Create a conversation to get started.</p>
-    <%
-    }
-    else{
-    %>
-      <ul class="mdl-list">
-    <%
-      for(Conversation conversation : conversations){
-    %>
-      <li><a href="/chat/<%= conversation.getTitle() %>">
-        <%= conversation.getTitle() %></a></li>
-    <%
-      }
-    %>
-      </ul>
-    <%
-    }
-    %>
-    <hr/>
-  </div>
-</body>
+    </body>
 </html>

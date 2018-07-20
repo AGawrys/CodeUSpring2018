@@ -8,8 +8,5 @@ target
 .project
 .settings
 *.iml
-<<<<<<< HEAD
-.DS_STORE 
-=======
 .DS_STORE
->>>>>>> origin/master
+

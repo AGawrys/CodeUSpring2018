@@ -14,8 +14,15 @@
 
 package codeu.model.data;
 
+import codeu.model.store.basic.UserStore;
+import codeu.model.store.basic.ConversationStore;
+
+import java.util.List;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.UUID;
+import java.util.ArrayList;
 
 /** Class representing a registered user. */
 public class User {
@@ -23,6 +30,7 @@ public class User {
   private final String name;
   private final String passwordHash;
   private final Instant creation;
+  private Boolean admin;
   private String profileImageString;
 
   /**
@@ -32,12 +40,14 @@ public class User {
    * @param name the username of this User
    * @param passwordHash the password hash of this User
    * @param creation the creation time of this User
+   * @param admin states if user is admin
    */
-  public User(UUID id, String name, String passwordHash, Instant creation) {
+   public User(UUID id, String name, String passwordHash, Instant creation, Boolean admin) {
     this.id = id;
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
+    this.admin = admin;
     this.profileImageString = null;
   }
 
@@ -60,6 +70,19 @@ public class User {
   public Instant getCreationTime() {
     return creation;
   }
+/**
+     * Returns if user is admin
+     */
+    public Boolean isAdmin() {
+        return admin;
+    }
+
+    /**
+     * Set admin attribute
+     */
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
   public String getImageString(){
       return profileImageString;
   }
