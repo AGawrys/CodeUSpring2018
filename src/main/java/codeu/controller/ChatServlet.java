@@ -13,6 +13,9 @@
 // limitations under the License.
 
 package codeu.controller;
+import com.vdurmont.emoji.EmojiParser;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import codeu.model.data.Conversation;
 import codeu.model.data.Message;
@@ -34,6 +37,14 @@ import org.jsoup.safety.Cleaner;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.jsoup.nodes.Document;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.*;
+import java.awt.image.BufferedImage;
+import java.awt.*;
+
 
 /** Servlet class responsible for the chat page. */
 public class ChatServlet extends HttpServlet {
@@ -151,17 +162,16 @@ public class ChatServlet extends HttpServlet {
     }
 
     String messageContent = request.getParameter("message");
-
     // this removes any HTML from the message content
     String cleanedMessageContent = clean(messageContent, Whitelist.basicWithImages());
-
+    String cleanedAndEmojiMessage = EmojiParser.parseToUnicode(cleanedMessageContent);
 
     Message message =
         new Message(
             UUID.randomUUID(),
             conversation.getId(),
             user.getId(),
-            cleanedMessageContent,
+            cleanedAndEmojiMessage,
             Instant.now());
 
     messageStore.addMessage(message);

@@ -63,6 +63,80 @@ public class ActivityFeedTest {
         activityFeedServlet.doGet(mockRequest, mockResponse);
         Mockito.verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
     }
+    
+    @Test
+    public void testGetMessageActivities(){
+        ActivityStore activityStore = ActivityStore.getInstance();
+        List<Message> message = new ArrayList<Message>();
+        List<User> fakeUsers = new ArrayList<User>();
+        List<Conversation> fakeConversations = new ArrayList<Conversation>();
+        Instant older = Instant.now();
+        Instant newest = older.plusSeconds(3);
+        message.add(new Message(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "Test1", older));
+        message.add(new Message(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "Test2", newest));
+        message.add(new Message(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "Test2", older.plusSeconds(1)));
+        Mockito.when(mockMessageStore.getAll()).thenReturn(message);
+        Mockito.when(mockUserStore.getAll()).thenReturn(fakeUsers);
+        Mockito.when(mockConversationStore.getAllConversations()).thenReturn(fakeConversations);
+        activityStore.setMessageStore(mockMessageStore);
+        activityStore.setConversationStore(mockConversationStore);
+        activityStore.setUserStore(mockUserStore);
+        
+        List<Activity> act = activityStore.getAllActivities();
+        
+        Mockito.verify(mockMessageStore).getAll();
+        Assert.assertEquals(3, act.size());
+        Assert.assertEquals(newest, act.get(0).creationTime);
+        Assert.assertEquals(older, act.get(2).creationTime);
+    }
+    
+    @Test
+    public void testGetConversationActivities(){
+        ActivityStore activityStore = ActivityStore.getInstance();
+        List<User> fakeUsers = new ArrayList<User>();
+        List<Message> fakeMessages = new ArrayList<Message>();
+        List<Conversation> conversations = new ArrayList<Conversation>();
+        Instant oldest = Instant.now();
+        conversations.add(new Conversation(UUID.randomUUID(), UUID.randomUUID(), "Test1",  oldest));
+        conversations.add(new Conversation(UUID.randomUUID(), UUID.randomUUID(), "Test2",  oldest.plusSeconds(1)));
+        conversations.add(new Conversation(UUID.randomUUID(), UUID.randomUUID(), "Test3",  oldest.plusSeconds(2)));
+        Mockito.when(mockConversationStore.getAllConversations()).thenReturn(conversations);
+        Mockito.when(mockUserStore.getAll()).thenReturn(fakeUsers);
+        Mockito.when(mockMessageStore.getAll()).thenReturn(fakeMessages);
+        activityStore.setMessageStore(mockMessageStore);
+        activityStore.setConversationStore(mockConversationStore);
+        activityStore.setUserStore(mockUserStore);
+           
+        List<Activity> act = activityStore.getAllActivities();
+        
+        Mockito.verify(mockConversationStore).getAllConversations();
+        Assert.assertEquals(3, act.size());
+        Assert.assertEquals(oldest, act.get(2).creationTime); //the oldest should be last
+    }
+    
+    @Test
+    public void testGetUserActivities(){
+        ActivityStore activityStore = ActivityStore.getInstance();
+        List<User> users = new ArrayList<User>();
+        List<Message> fakeMessages = new ArrayList<Message>();
+        List<Conversation> fakeConversations = new ArrayList<Conversation>();
+        Instant oldest = Instant.now();
+        Instant younger = oldest.plusSeconds(1);
+        users.add(new User(UUID.randomUUID(), "Test4", "fakePassword", oldest));
+        users.add(new User(UUID.randomUUID(), "Test5", "fakePassword", younger));        
+        Mockito.when(mockUserStore.getAll()).thenReturn(users);
+        Mockito.when(mockMessageStore.getAll()).thenReturn(fakeMessages);
+        Mockito.when(mockConversationStore.getAllConversations()).thenReturn(fakeConversations); 
+        activityStore.setMessageStore(mockMessageStore);
+        activityStore.setConversationStore(mockConversationStore);
+        activityStore.setUserStore(mockUserStore);
+    
+        List<Activity> act = activityStore.getAllActivities();
+        
+        Mockito.verify(mockUserStore).getAll();
+        Assert.assertEquals(2, act.size());
+        Assert.assertEquals(oldest, act.get(1).creationTime); //the oldest should be last
+    }
 
     @Test
     public void testGetMessageActivities(){

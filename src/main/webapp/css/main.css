@@ -50,6 +50,11 @@ body {
             background-color: #84CEEB; }}
 
 
+img {
+  width: 10%;
+  height: 10%;
+}
+
 #container {
   margin-left: auto;
   margin-right: auto;

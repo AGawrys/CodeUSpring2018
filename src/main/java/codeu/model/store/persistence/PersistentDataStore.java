@@ -212,7 +212,6 @@ public class PersistentDataStore {
     conversationEntity.setProperty("creation_time", conversation.getCreationTime().toString());
     datastore.put(conversationEntity);
   }
-
   public void writeThrough(About about) {
     Entity aboutEntity = new Entity("chat-conversations", about.getId().toString());
     aboutEntity.setProperty("uuid", about.getId().toString());

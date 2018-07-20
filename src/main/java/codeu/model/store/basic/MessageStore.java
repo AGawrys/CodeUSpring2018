@@ -94,12 +94,11 @@ public class MessageStore {
   public void setMessages(List<Message> messages) {
     this.messages = messages;
   }
-
+ 
   public List<Message> getAll(){
       return messages;
   }
-
-  public Message getById(UUID id){
+    public Message getById(UUID id){
       for (Message message : messages) {
         if (message.getId().equals(id)) {
           return message;

@@ -91,8 +91,6 @@ List<Activity> activities = (List<Activity>) request.getAttribute("activities");
       <p>
         Updates will appear here.
       </p>
-
-    <%
         String result;
         for (Activity activity : activities) {
             if (activity.getType() == Type.MESSAGESENT) {
@@ -108,6 +106,5 @@ List<Activity> activities = (List<Activity>) request.getAttribute("activities");
         }
     %>
         </div>
-
     </body>
 </html>

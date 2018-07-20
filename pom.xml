@@ -100,6 +100,12 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+      <groupId>com.vdurmont</groupId>
+      <artifactId>emoji-java</artifactId>
+      <version>4.0.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -109,10 +115,10 @@
         <artifactId>appengine-maven-plugin</artifactId>
         <version>1.9.59</version>
         <configuration>
-          <jvmFlags>
+            <jvmFlags>
             <jvmFlag>-Xdebug</jvmFlag>
             <jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag>
-          </jvmFlags>
+        </jvmFlags>
         </configuration>
       </plugin>
     </plugins>

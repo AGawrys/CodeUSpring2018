@@ -31,6 +31,7 @@ public class User {
   private final String passwordHash;
   private final Instant creation;
   private Boolean admin;
+  private String profileImageString;
 
   /**
    * Constructs a new User.
@@ -47,13 +48,14 @@ public class User {
     this.passwordHash = passwordHash;
     this.creation = creation;
     this.admin = admin;
+    this.profileImageString = null;
   }
 
   /** Returns the ID of this User. */
   public UUID getId() {
     return id;
   }
-
+  
   /** Returns the username of this User. */
   public String getName() {
     return name;
@@ -81,4 +83,10 @@ public class User {
     public void setAdmin(Boolean admin) {
         this.admin = admin;
     }
+  public String getImageString(){
+      return profileImageString;
+  }
+  public void setImageString(String image){
+      this.profileImageString = image;
+  }
 }

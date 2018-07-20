@@ -41,10 +41,10 @@ public class ActivityFeedServlet extends HttpServlet {
    }
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{        
         List<Activity> activities = activityStore.getAllActivities();
         request.setAttribute("activities", activities);
-        request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);   
     }
 
     @Override
