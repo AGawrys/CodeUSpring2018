@@ -70,7 +70,7 @@
         <%
         } else {
         %>
-        <%= request.getAttribute("image")%>
+        <img src="/images/default_pfp.jpg" width="200" height="200" />
         <%
             }
         %>
